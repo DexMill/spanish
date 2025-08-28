@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Senderos 1A – Lección Preliminar · HTML Anki</title>
+    <style>
+      :root {
+        --bg: #0f1320;
+        --panel: #141a2a;
+        --card: #0d1220;
+        --text: #e8ecf1;
+        --muted: #98a2b3;
+        --accent: #7c5cff;
+        --accent2: #36d399;
+        --danger: #ef4444;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, Segoe UI, Arial, sans-serif;
+        background: linear-gradient(180deg, #0b0f1a, #0f1320);
+        color: var(--text);
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 18px;
+        border-bottom: 1px solid #1e263b;
+        background: #0b1020;
+        position: sticky;
+        top: 0;
+        z-index: 5;
+      }
+      header h1 {
+        font-size: 18px;
+        margin: 0;
+        letter-spacing: 0.2px;
+      }
+      header .badges {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .chip {
+        font-size: 12px;
+        padding: 6px 10px;
+        border: 1px solid #222b45;
+        border-radius: 999px;
+        background: #0f1628;
+        color: #cdd6f4;
+      }
+
+      .container {
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        gap: 16px;
+        padding: 16px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      aside {
+        background: var(--panel);
+        border: 1px solid #1f2740;
+        border-radius: 16px;
+        padding: 14px;
+      }
+      main {
+        display: grid;
+        gap: 16px;
+      }
+
+      .section {
+        margin-bottom: 16px;
+      }
+      .section h3 {
+        margin: 6px 0 10px;
+        font-size: 14px;
+        color: #cbd5e1;
+        letter-spacing: 0.3px;
+      }
+
+      .categories {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+        max-height: 300px;
+        overflow: auto;
+        padding-right: 4px;
+      }
+      .cat {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px;
+        border-radius: 10px;
+        background: #0f1628;
+        border: 1px solid #1f2740;
+      }
+
+      .controls {
+        display: grid;
+        gap: 10px;
+      }
+      .row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        cursor: pointer;
+        border: none;
+        border-radius: 12px;
+        padding: 10px 14px;
+        font-weight: 600;
+        background: #1a2140;
+        color: #e8ecf1;
+        border: 1px solid #273055;
+        transition: 0.15s;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+      }
+      .btn.accent {
+        background: var(--accent);
+        border-color: #5c43ff;
+      }
+      .btn.green {
+        background: var(--accent2);
+        color: #07170f;
+        border-color: #2bbf86;
+      }
+      .btn.outline {
+        background: transparent;
+        border-color: #2a355c;
+      }
+      .btn.danger {
+        background: var(--danger);
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid #1f2740;
+        border-radius: 20px;
+        padding: 24px;
+        display: grid;
+        gap: 14px;
+        min-height: 280px;
+        align-content: center;
+        justify-items: center;
+        text-align: center;
+      }
+      .front {
+        font-size: 28px;
+      }
+      .back {
+        font-size: 22px;
+        color: #d1e0ff;
+      }
+      .meta {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .grade-bar {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .grade {
+        padding: 12px 16px;
+        border-radius: 12px;
+        border: 1px solid #263159;
+        background: #121a30;
+        color: #e5e7eb;
+        cursor: pointer;
+        font-weight: 700;
+      }
+      .g-again {
+        background: #2b1120;
+        border-color: #6b203f;
+      }
+      .g-hard {
+        background: #1f2338;
+        border-color: #2f3b6e;
+      }
+      .g-good {
+        background: #10271e;
+        border-color: #1f5e45;
+      }
+      .g-easy {
+        background: #0f2335;
+        border-color: #1d5e9e;
+      }
+
+      .stats {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .stat {
+        background: #0f1628;
+        border: 1px solid #1f2740;
+        padding: 10px 12px;
+        border-radius: 12px;
+        font-size: 13px;
+      }
+
+      .hidden {
+        display: none;
+      }
+      .small {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      input[type="number"],
+      select {
+        background: #0f1628;
+        border: 1px solid #293356;
+        color: #e9eef7;
+        border-radius: 10px;
+        padding: 8px 10px;
+      }
+      label {
+        font-size: 13px;
+        color: #cbd5e1;
+      }
+
+      .footer {
+        font-size: 12px;
+        color: #a3a8b9;
+        text-align: center;
+        padding: 10px 0 24px;
+      }
+      a {
+        color: #a8c0ff;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Senderos 1A · Lección Preliminar — HTML Anki (Spaced Repetition)</h1>
+      <div class="badges">
+        <span class="chip">Local-first</span>
+        <span class="chip">Spaced Repetition</span>
+        <span class="chip">By Category</span>
+      </div>
+    </header>
+
+    <div class="container">
+      <aside>
+        <div class="section">
+          <h3>Study Scope</h3>
+          <div class="categories" id="categoryList"></div>
+        </div>
+        <div class="section controls">
+          <h3>Settings</h3>
+          <div class="row">
+            <label>
+              Direction:
+              <select id="direction">
+                <option value="es-en">Spanish → English</option>
+                <option value="en-es">English → Spanish</option>
+                <option value="mix">Mix</option>
+              </select>
+            </label>
+            <label>
+              Max New / Session:
+              <input id="maxNew" type="number" value="999" min="1" />
+            </label>
+          </div>
+          <div class="row">
+            <button class="btn accent" id="startBtn">Start / Resume</button>
+            <button class="btn outline" id="exportBtn">Export Progress</button>
+            <label class="btn outline" for="importFile" style="cursor: pointer"
+              >Import Progress</label
+            >
+            <input
+              id="importFile"
+              type="file"
+              accept="application/json"
+              style="display: none"
+            />
+            <button
+              class="btn danger"
+              id="resetBtn"
+              title="Clears all scheduling data"
+            >
+              Reset Progress
+            </button>
+          </div>
+        </div>
+        <div class="section">
+          <h3>Session Stats</h3>
+          <div class="stats">
+            <div class="stat" id="dueStat">Due now: 0</div>
+            <div class="stat" id="newStat">New left: 0</div>
+            <div class="stat" id="seenStat">Seen this session: 0</div>
+          </div>
+        </div>
+      </aside>
+
+      <main>
+        <div class="card" id="card">
+          <div class="meta" id="cardMeta">Pick categories and press Start</div>
+          <div class="front" id="front"></div>
+          <div class="back hidden" id="back"></div>
+          <div class="small" id="hint"></div>
+          <div class="row">
+            <button class="btn" id="flipBtn">Show Answer (Space)</button>
+          </div>
+          <div class="grade-bar hidden" id="gradeBar">
+            <button class="grade g-again" data-grade="1">Again</button>
+            <button class="grade g-hard" data-grade="2">Hard</button>
+            <button class="grade g-good" data-grade="3">Good</button>
+            <button class="grade g-easy" data-grade="4">Easy</button>
+          </div>
+        </div>
+
+        <div class="footer">
+          Spaced repetition data is saved in your browser (localStorage). You
+          can export/import JSON anytime.
+        </div>
+      </main>
+    </div>
+
+    <script>
+      // ====== Data: Senderos 1A – Lección Preliminar (as provided) ======
+      const RAW = [
+        // Classroom Words
+        { cat: "Classroom Words", es: "el bolígrafo", en: "the pen" },
+        { cat: "Classroom Words", es: "la carpeta", en: "the folder" },
+        { cat: "Classroom Words", es: "el cuaderno", en: "the notebook" },
+        { cat: "Classroom Words", es: "el estudiante", en: "the male student" },
+        {
+          cat: "Classroom Words",
+          es: "la estudiante",
+          en: "the female student",
+        },
+        {
+          cat: "Classroom Words",
+          es: "la hoja de papel",
+          en: "the sheet of paper",
+        },
+        { cat: "Classroom Words", es: "el lápiz", en: "the pencil" },
+        { cat: "Classroom Words", es: "el libro", en: "the book" },
+        { cat: "Classroom Words", es: "el profesor", en: "the male teacher" },
+        {
+          cat: "Classroom Words",
+          es: "la profesora",
+          en: "the female teacher",
+        },
+        { cat: "Classroom Words", es: "el pupitre", en: "the student desk" },
+        {
+          cat: "Classroom Words",
+          es: "la sala de clases",
+          en: "the classroom",
+        },
+
+        // Time Words
+        { cat: "Time Words", es: "hoy", en: "today" },
+        { cat: "Time Words", es: "mañana", en: "tomorrow" },
+        { cat: "Time Words", es: "ayer", en: "yesterday" },
+        { cat: "Time Words", es: "el día", en: "the day" },
+        { cat: "Time Words", es: "la semana", en: "the week" },
+        { cat: "Time Words", es: "el mes", en: "the month" },
+        { cat: "Time Words", es: "el año", en: "the year" },
+
+        // Colors
+        { cat: "Colors", es: "rojo", en: "red" },
+        { cat: "Colors", es: "azul", en: "blue" },
+        { cat: "Colors", es: "verde", en: "green" },
+        { cat: "Colors", es: "amarillo", en: "yellow" },
+        { cat: "Colors", es: "morado", en: "purple" },
+        { cat: "Colors", es: "anaranjado", en: "orange" },
+        { cat: "Colors", es: "rosado", en: "pink" },
+        { cat: "Colors", es: "café", en: "brown" },
+        { cat: "Colors", es: "negro", en: "black" },
+        { cat: "Colors", es: "blanco", en: "white" },
+        { cat: "Colors", es: "gris", en: "gray" },
+
+        // Days of the Week
+        { cat: "Days of the Week", es: "lunes", en: "monday" },
+        { cat: "Days of the Week", es: "martes", en: "tuesday" },
+        { cat: "Days of the Week", es: "miércoles", en: "wednesday" },
+        { cat: "Days of the Week", es: "jueves", en: "thursday" },
+        { cat: "Days of the Week", es: "viernes", en: "friday" },
+        { cat: "Days of the Week", es: "sábado", en: "saturday" },
+        { cat: "Days of the Week", es: "domingo", en: "sunday" },
+
+        // Months
+        { cat: "Months", es: "enero", en: "january" },
+        { cat: "Months", es: "febrero", en: "february" },
+        { cat: "Months", es: "marzo", en: "march" },
+        { cat: "Months", es: "abril", en: "april" },
+        { cat: "Months", es: "mayo", en: "may" },
+        { cat: "Months", es: "junio", en: "june" },
+        { cat: "Months", es: "julio", en: "july" },
+        { cat: "Months", es: "agosto", en: "august" },
+        { cat: "Months", es: "septiembre", en: "september" },
+        { cat: "Months", es: "octubre", en: "october" },
+        { cat: "Months", es: "noviembre", en: "november" },
+        { cat: "Months", es: "diciembre", en: "december" },
+
+        // Numbers
+        { cat: "Numbers", es: "uno", en: "one" },
+        { cat: "Numbers", es: "dos", en: "two" },
+        { cat: "Numbers", es: "tres", en: "three" },
+        { cat: "Numbers", es: "cuatro", en: "four" },
+        { cat: "Numbers", es: "cinco", en: "five" },
+        { cat: "Numbers", es: "seis", en: "six" },
+        { cat: "Numbers", es: "siete", en: "seven" },
+        { cat: "Numbers", es: "ocho", en: "eight" },
+        { cat: "Numbers", es: "nueve", en: "nine" },
+        { cat: "Numbers", es: "diez", en: "ten" },
+        { cat: "Numbers", es: "once", en: "eleven" },
+        { cat: "Numbers", es: "doce", en: "twelve" },
+        { cat: "Numbers", es: "trece", en: "thirteen" },
+        { cat: "Numbers", es: "catorce", en: "fourteen" },
+        { cat: "Numbers", es: "quince", en: "fifteen" },
+        { cat: "Numbers", es: "dieciséis", en: "sixteen" },
+        { cat: "Numbers", es: "diecisiete", en: "seventeen" },
+        { cat: "Numbers", es: "dieciocho", en: "eighteen" },
+        { cat: "Numbers", es: "diecinueve", en: "nineteen" },
+        { cat: "Numbers", es: "veinte", en: "twenty" },
+
+        // Weather
+        { cat: "Weather", es: "hace sol", en: "sunny" },
+        { cat: "Weather", es: "llueve", en: "rainy" },
+        { cat: "Weather", es: "está nublado", en: "cloudy" },
+        { cat: "Weather", es: "hace viento", en: "windy" },
+        { cat: "Weather", es: "nieve", en: "snowy" },
+        { cat: "Weather", es: "hace calor", en: "hot" },
+        { cat: "Weather", es: "hace frío", en: "cold" },
+        { cat: "Weather", es: "hace fresco", en: "cool" },
+        { cat: "Weather", es: "hace buen tiempo", en: "good weather" },
+        { cat: "Weather", es: "hace mal tiempo", en: "bad weather" },
+        { cat: "Weather", es: "está mas o menos", en: "so-so weather" },
+
+        // Seasons
+        { cat: "Seasons", es: "la primavera", en: "spring" },
+        { cat: "Seasons", es: "el verano", en: "summer" },
+        { cat: "Seasons", es: "el otoño", en: "fall" },
+        { cat: "Seasons", es: "el invierno", en: "winter" },
+
+        // Adjectives
+        { cat: "Adjectives", es: "simpático", en: "nice(male)" },
+        { cat: "Adjectives", es: "simpática", en: "nice(female)" },
+        { cat: "Adjectives", es: "bueno", en: "good(male)" },
+        { cat: "Adjectives", es: "buena", en: "good(female)" },
+        { cat: "Adjectives", es: "deportista", en: "sports minded" },
+        { cat: "Adjectives", es: "gracioso", en: "funny(male)" },
+        { cat: "Adjectives", es: "graciosa", en: "funny(female)" },
+        { cat: "Adjectives", es: "inteligente", en: "smart" },
+        { cat: "Adjectives", es: "artístico", en: "artistic(male)" },
+        { cat: "Adjectives", es: "artística", en: "artistic(female)" },
+        { cat: "Adjectives", es: "atrevido", en: "daring(male)" },
+        { cat: "Adjectives", es: "atrevida", en: "daring(female)" },
+        { cat: "Adjectives", es: "desordenado", en: "disorganized(male)" },
+        { cat: "Adjectives", es: "desordenada", en: "disorganized(female)" },
+        { cat: "Adjectives", es: "ordenado", en: "organized(male)" },
+        { cat: "Adjectives", es: "ordenada", en: "organized(female)" },
+        { cat: "Adjectives", es: "reservado", en: "shy/reserved(male)" },
+        { cat: "Adjectives", es: "reservada", en: "shy/reserved(female)" },
+        { cat: "Adjectives", es: "serio", en: "serious(male)" },
+        { cat: "Adjectives", es: "seria", en: "serious(female)" },
+        { cat: "Adjectives", es: "talentoso", en: "talented(male)" },
+        { cat: "Adjectives", es: "talentosa", en: "talented(female)" },
+        { cat: "Adjectives", es: "sociable", en: "sociable" },
+        { cat: "Adjectives", es: "estudioso", en: "good student(male)" },
+        { cat: "Adjectives", es: "estudiosa", en: "good student(female)" },
+        { cat: "Adjectives", es: "trabajador", en: "hard working(male)" },
+        { cat: "Adjectives", es: "trabajadora", en: "hard working(female)" },
+      ];
+
+      // Preserve original order of categories
+      const CATEGORY_ORDER = [
+        "Classroom Words",
+        "Time Words",
+        "Colors",
+        "Days of the Week",
+        "Months",
+        "Numbers",
+        "Weather",
+        "Seasons",
+        "Adjectives",
+      ];
+
+      // ====== Minimal SM-2–style scheduler (localStorage) ======
+      const STORAGE_KEY = "senderos1a_anki_v1";
+      const S = {
+        // returns map id -> schedule
+        load() {
+          try {
+            return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+          } catch {
+            return {};
+          }
+        },
+        save(data) {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        },
+      };
+
+      // Build card IDs deterministically
+      const CARDS = RAW.map((r, i) => ({
+        id: `${r.cat}::${r.es}::${r.en}`,
+        cat: r.cat,
+        es: r.es,
+        en: r.en,
+      }));
+
+      function now() {
+        return Date.now();
+      }
+
+      function defaultSched() {
+        return { ef: 2.5, reps: 0, interval: 0, due: now(), lapses: 0 };
+      }
+
+      function gradeCard(sched, grade) {
+        // grade: 1 Again, 2 Hard, 3 Good, 4 Easy
+        const MIN_EF = 1.3;
+        const day = 24 * 60 * 60 * 1000;
+
+        if (grade === 1) {
+          sched.reps = 0;
+          sched.interval = 60 * 1000; // 1 minute
+          sched.ef = Math.max(MIN_EF, sched.ef - 0.3);
+          sched.lapses = (sched.lapses || 0) + 1;
+        } else if (grade === 2) {
+          sched.ef = Math.max(MIN_EF, sched.ef - 0.15);
+          if (sched.reps === 0) {
+            sched.interval = 5 * 60 * 1000; // 5 minutes
+          } else {
+            sched.interval = Math.max(day, Math.round(sched.interval * 1.2));
+          }
+        } else if (grade === 3) {
+          if (sched.reps === 0) {
+            sched.reps = 1;
+            sched.interval = day;
+          } else if (sched.reps === 1) {
+            sched.reps = 2;
+            sched.interval = 6 * day;
+          } else {
+            sched.reps += 1;
+            sched.interval = Math.round(sched.interval * sched.ef);
+          }
+          // keep EF stable for Good
+        } else if (grade === 4) {
+          sched.ef += 0.15;
+          if (sched.reps === 0) {
+            sched.reps = 2;
+            sched.interval = 4 * day;
+          } else {
+            sched.reps += 1;
+            sched.interval = Math.round(sched.interval * (sched.ef + 0.3));
+          }
+        }
+        sched.due = now() + sched.interval;
+        return sched;
+      }
+
+      // ====== UI State ======
+      const els = {
+        categoryList: document.getElementById("categoryList"),
+        startBtn: document.getElementById("startBtn"),
+        flipBtn: document.getElementById("flipBtn"),
+        card: document.getElementById("card"),
+        front: document.getElementById("front"),
+        back: document.getElementById("back"),
+        hint: document.getElementById("hint"),
+        cardMeta: document.getElementById("cardMeta"),
+        gradeBar: document.getElementById("gradeBar"),
+        dueStat: document.getElementById("dueStat"),
+        newStat: document.getElementById("newStat"),
+        seenStat: document.getElementById("seenStat"),
+        direction: document.getElementById("direction"),
+        maxNew: document.getElementById("maxNew"),
+        resetBtn: document.getElementById("resetBtn"),
+        exportBtn: document.getElementById("exportBtn"),
+        importFile: document.getElementById("importFile"),
+      };
+
+      let sched = S.load();
+      let queue = []; // ordered list of card IDs for this session
+      let current = null; // current card object
+      let seenThisSession = 0;
+
+      function unique(arr) {
+        return Array.from(new Set(arr));
+      }
+
+      function categories() {
+        return unique(CARDS.map((c) => c.cat));
+      }
+
+      function renderCategoryList() {
+        const cats = CATEGORY_ORDER.filter((c) => categories().includes(c));
+        els.categoryList.innerHTML = "";
+        cats.forEach((cat) => {
+          const id = "cat_" + cat.replace(/\W+/g, "_");
+          const wrap = document.createElement("label");
+          wrap.className = "cat";
+          wrap.innerHTML = `
+        <input type="checkbox" id="${id}" data-cat="${cat}" checked />
+        <span>${cat}</span>
+      `;
+          els.categoryList.appendChild(wrap);
+        });
+      }
+
+      function selectedCategories() {
+        return Array.from(
+          els.categoryList.querySelectorAll('input[type="checkbox"]:checked')
+        ).map((i) => i.dataset.cat);
+      }
+
+      function buildQueue() {
+        const cats = new Set(selectedCategories());
+        const maxNew = parseInt(els.maxNew.value || "999", 10);
+        const nowTs = now();
+        const due = [],
+          fresh = [];
+
+        CARDS.forEach((c) => {
+          if (!cats.has(c.cat)) return;
+          let sc = sched[c.id];
+          if (!sc) {
+            fresh.push(c);
+            return;
+          }
+          if (sc.due <= nowTs) due.push(c);
+        });
+
+        // Limit new cards per session
+        const newLimited = fresh.slice(0, maxNew);
+
+        // Interleave due and new: prioritize due
+        const combined = [...due, ...newLimited];
+
+        // Simple stable shuffle: Fisher-Yates
+        for (let i = combined.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [combined[i], combined[j]] = [combined[j], combined[i]];
+        }
+
+        queue = combined.map((c) => c.id);
+        updateStats();
+      }
+
+      function fmtTime(ts) {
+        const d = new Date(ts);
+        return d.toLocaleString();
+      }
+
+      function updateStats() {
+        const nowTs = now();
+        const cats = new Set(selectedCategories());
+        let due = 0,
+          fresh = 0;
+        CARDS.forEach((c) => {
+          if (!cats.has(c.cat)) return;
+          const sc = sched[c.id];
+          if (!sc) fresh++;
+          else if (sc.due <= nowTs) due++;
+        });
+        els.dueStat.textContent = `Due now: ${due}`;
+        els.newStat.textContent = `New left: ${Math.max(
+          0,
+          parseInt(els.maxNew.value || "999", 10) - seenThisSessionNewCount()
+        )}`;
+        els.seenStat.textContent = `Seen this session: ${seenThisSession}`;
+      }
+
+      function seenThisSessionNewCount() {
+        // naive: count how many cards we introduced this session by checking a temp flag
+        return CARDS.filter((c) => c._seenNewSession).length;
+      }
+
+      function nextCard() {
+        if (queue.length === 0) {
+          buildQueue();
+          if (queue.length === 0) {
+            els.cardMeta.textContent = "No cards due. You are caught up!";
+            els.front.textContent = "";
+            els.back.textContent = "";
+            els.gradeBar.classList.add("hidden");
+            return;
+          }
+        }
+        const id = queue.shift();
+        current = CARDS.find((c) => c.id === id);
+        const sc = sched[id] || defaultSched();
+
+        // Determine direction
+        let dir = els.direction.value;
+        if (dir === "mix") dir = Math.random() < 0.5 ? "es-en" : "en-es";
+
+        const front = dir === "es-en" ? current.es : current.en;
+        const back = dir === "es-en" ? current.en : current.es;
+
+        els.cardMeta.textContent = `${current.cat}`;
+        els.front.textContent = front;
+        els.back.textContent = back;
+        els.back.classList.add("hidden");
+        els.gradeBar.classList.add("hidden");
+        els.hint.textContent =
+          sc.reps === 0
+            ? "New card"
+            : `Due ${fmtTime(sc.due)} · EF ${sc.ef.toFixed(2)} · Streak ${
+                sc.reps
+              }`;
+      }
+
+      function showAnswer() {
+        els.back.classList.remove("hidden");
+        els.gradeBar.classList.remove("hidden");
+      }
+
+      function onGrade(grade) {
+        if (!current) return;
+        const id = current.id;
+        let sc = sched[id] || defaultSched();
+        const firstTime = !sched[id];
+        sc = gradeCard(sc, grade);
+        sched[id] = sc;
+        S.save(sched);
+        if (firstTime) {
+          current._seenNewSession = true;
+        }
+        seenThisSession++;
+        updateStats();
+        nextCard();
+      }
+
+      // ====== Export / Import / Reset ======
+      function exportProgress() {
+        const blob = new Blob([JSON.stringify(sched, null, 2)], {
+          type: "application/json",
+        });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "senderos1a_progress.json";
+        a.click();
+      }
+
+      function importProgress(file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          try {
+            const data = JSON.parse(reader.result);
+            if (typeof data === "object" && data) {
+              sched = data;
+              S.save(sched);
+              alert("Progress imported!");
+              updateStats();
+            } else throw new Error("Invalid file");
+          } catch (e) {
+            alert("Import failed: " + e.message);
+          }
+        };
+        reader.readAsText(file);
+      }
+
+      function resetProgress() {
+        if (confirm("Reset all spaced-repetition data for this deck?")) {
+          sched = {};
+          S.save(sched);
+          seenThisSession = 0;
+          CARDS.forEach((c) => delete c._seenNewSession);
+          updateStats();
+          nextCard();
+        }
+      }
+
+      // ====== Keyboard Shortcuts ======
+      document.addEventListener("keydown", (e) => {
+        if (e.code === "Space") {
+          e.preventDefault();
+          if (els.back.classList.contains("hidden")) showAnswer();
+        }
+        if (!els.back.classList.contains("hidden")) {
+          if (e.key === "1") onGrade(1);
+          if (e.key === "2") onGrade(2);
+          if (e.key === "3") onGrade(3);
+          if (e.key === "4") onGrade(4);
+        }
+      });
+
+      // ====== Wire UI ======
+      function init() {
+        renderCategoryList();
+        updateStats();
+
+        els.startBtn.onclick = () => {
+          buildQueue();
+          nextCard();
+        };
+        els.flipBtn.onclick = showAnswer;
+        els.gradeBar
+          .querySelectorAll("[data-grade]")
+          .forEach(
+            (btn) =>
+              (btn.onclick = () => onGrade(parseInt(btn.dataset.grade, 10)))
+          );
+
+        els.resetBtn.onclick = resetProgress;
+        els.exportBtn.onclick = exportProgress;
+        els.importFile.onchange = (e) => {
+          const f = e.target.files[0];
+          if (f) importProgress(f);
+        };
+
+        // Changing categories updates stats and queue soon-ish
+        els.categoryList.addEventListener("change", () => {
+          updateStats();
+          buildQueue();
+        });
+        els.direction.addEventListener("change", () => {});
+        els.maxNew.addEventListener("change", () => updateStats());
+      }
+
+      init();
+    </script>
+  </body>
+</html>
