@@ -158,6 +158,12 @@
         justify-items: center;
         text-align: center;
       }
+      .front-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
       .front {
         font-size: 28px;
       }
@@ -349,7 +355,16 @@
       <main>
         <div class="card" id="card">
           <div class="meta" id="cardMeta">Pick categories and press Start</div>
-          <div class="front" id="front"></div>
+          <div class="front-container">
+            <div class="front" id="front"></div>
+            <button
+              class="btn audio-btn"
+              id="speakBtn"
+              title="Listen to Spanish"
+            >
+              <span class="material-icons">volume_up</span>
+            </button>
+          </div>
           <div class="back hidden" id="back"></div>
           <div class="small" id="hint"></div>
           <div class="row">
@@ -918,13 +933,29 @@
           .normalize("NFD")
           .replace(/[\u0300-\u036f]/g, "");
 
-        // Convert number words to digits
-        const asDigit = numberWords[normalized];
-        if (asDigit) return asDigit;
+        // For the Numbers category, handle numeric answers
+        if (current && current.cat === "Numbers") {
+          // If input is a number (e.g., "18"), convert to word
+          if (/^\d+$/.test(normalized)) {
+            const asWord = digitWords[normalized];
+            if (asWord) return asWord;
+          }
+          // If input is a word (e.g., "eighteen"), convert to word
+          const asDigit = numberWords[normalized];
+          if (asDigit) {
+            const backToWord = digitWords[asDigit];
+            if (backToWord) return backToWord;
+          }
+        } else {
+          // For non-number categories, use original logic
+          // Convert number words to digits
+          const asDigit = numberWords[normalized];
+          if (asDigit) return asDigit;
 
-        // Convert digits to number words
-        const asWord = digitWords[normalized];
-        if (asWord) return asWord;
+          // Convert digits to number words
+          const asWord = digitWords[normalized];
+          if (asWord) return asWord;
+        }
 
         return normalized;
       }
@@ -1361,6 +1392,15 @@
         updateStats();
         setupSpeechRecognition();
         addAudioControls();
+
+        // Add Spanish text-to-speech button handler
+        const speakBtn = document.getElementById("speakBtn");
+        if (speakBtn) {
+          speakBtn.onclick = () => {
+            // Always speak the Spanish text regardless of mode
+            speak(current.es, "es");
+          };
+        }
 
         els.startBtn.onclick = () => {
           buildQueue();
