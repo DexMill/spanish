@@ -288,8 +288,20 @@
             <label>
               Direction:
               <select id="direction">
-                <option value="es-en">Spanish → English</option>
-                <option value="en-es">English → Spanish</option>
+                <option value="es-en">Spanish Text → English Text</option>
+                <option value="en-es">English Text → Spanish Text</option>
+                <option value="es-en-voice">
+                  Spanish Text → English Voice
+                </option>
+                <option value="en-es-voice">
+                  English Text → Spanish Voice
+                </option>
+                <option value="es-voice-en">
+                  Spanish Voice → English Text
+                </option>
+                <option value="en-voice-es">
+                  English Voice → Spanish Text
+                </option>
                 <option value="mix">Mix</option>
               </select>
             </label>
@@ -748,11 +760,37 @@
 
         // Determine direction
         let dir = els.direction.value;
-        if (dir === "mix") dir = Math.random() < 0.5 ? "es-en" : "en-es";
+        if (dir === "mix") {
+          const modes = [
+            "es-en",
+            "en-es",
+            "es-en-voice",
+            "en-es-voice",
+            "es-voice-en",
+            "en-voice-es",
+          ];
+          dir = modes[Math.floor(Math.random() * modes.length)];
+        }
 
-        const front = dir === "es-en" ? current.es : current.en;
-        const back = dir === "es-en" ? current.en : current.es;
+        // Handle different modes
+        const isVoiceInput = dir.includes("-voice-");
+        const isVoiceOutput = dir.includes("-voice");
+        const isSpanishVoice =
+          dir.startsWith("es") && (isVoiceInput || isVoiceOutput);
+        const isEnglishVoice =
+          dir.startsWith("en") && (isVoiceInput || isVoiceOutput);
 
+        // Set up front and back based on direction
+        let front, back;
+        if (dir.startsWith("es")) {
+          front = current.es;
+          back = current.en;
+        } else {
+          front = current.en;
+          back = current.es;
+        }
+
+        // Update UI elements
         els.cardMeta.textContent = `${current.cat}`;
         els.front.textContent = front;
         els.back.textContent = back;
@@ -760,7 +798,18 @@
         els.gradeBar.classList.add("hidden");
         els.answerInput.value = "";
         els.answerInput.classList.remove("correct", "incorrect");
-        els.answerInput.focus();
+
+        // Show/hide input based on mode
+        if (dir.endsWith("-voice")) {
+          // text-to-voice modes
+          els.answerInput.setAttribute("readonly", "true");
+          els.answerInput.placeholder = "Click microphone to record answer...";
+        } else {
+          els.answerInput.removeAttribute("readonly");
+          els.answerInput.placeholder = "Type your answer...";
+          els.answerInput.focus();
+        }
+
         cardStartTime = now();
         const responseTimeText = current._responseTime
           ? ` · Time: ${(current._responseTime / 1000).toFixed(1)}s`
@@ -903,10 +952,183 @@
         }
       });
 
+      // ====== Speech API Integration ======
+      const speech = {
+        synthesis: window.speechSynthesis,
+        recognition: new (window.SpeechRecognition ||
+          window.webkitSpeechRecognition)(),
+        voices: {
+          es: null,
+          en: null,
+        },
+        isListening: false,
+        audioButton: null,
+      };
+
+      // Initialize speech synthesis voices
+      function initVoices() {
+        const voices = speech.synthesis.getVoices();
+        speech.voices.es =
+          voices.find((v) => v.lang.startsWith("es")) || voices[0];
+        speech.voices.en =
+          voices.find((v) => v.lang.startsWith("en")) || voices[0];
+      }
+
+      // Load voices when they're ready
+      if (speech.synthesis.onvoiceschanged !== undefined) {
+        speech.synthesis.onvoiceschanged = initVoices;
+      }
+      initVoices();
+
+      // Configure speech recognition
+      speech.recognition.continuous = false;
+      speech.recognition.interimResults = false;
+
+      function speak(text, lang) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.voice = speech.voices[lang];
+        utterance.lang = lang === "es" ? "es-ES" : "en-US";
+        speech.synthesis.speak(utterance);
+      }
+
+      function startListening(lang) {
+        if (speech.isListening) return;
+        speech.recognition.lang = lang === "es" ? "es-ES" : "en-US";
+        speech.recognition.start();
+        speech.isListening = true;
+        if (speech.audioButton) {
+          speech.audioButton.classList.add("listening");
+        }
+      }
+
+      function stopListening() {
+        if (!speech.isListening) return;
+        speech.recognition.stop();
+        speech.isListening = false;
+        if (speech.audioButton) {
+          speech.audioButton.classList.remove("listening");
+        }
+      }
+
+      // Handle speech recognition results
+      speech.recognition.onresult = (event) => {
+        const result = event.results[0][0].transcript.toLowerCase();
+        els.answerInput.value = result;
+        stopListening();
+      };
+
+      speech.recognition.onend = () => {
+        stopListening();
+      };
+
+      speech.recognition.onerror = (event) => {
+        console.error("Speech recognition error:", event.error);
+        stopListening();
+      };
+
+      // Add audio controls to the card
+      function addAudioControls() {
+        const audioControls = document.createElement("div");
+        audioControls.className = "audio-controls";
+
+        // Only show audio controls for voice modes
+        const dir = els.direction.value;
+        const isTextToVoice = dir.endsWith("-voice"); // es-en-voice or en-es-voice
+        const isVoiceToText = dir.includes("-voice-"); // es-voice-en or en-voice-es
+
+        if (isTextToVoice || isVoiceToText) {
+          let html = "";
+          // For text-to-voice, show only record button
+          if (isTextToVoice) {
+            html += `
+                <button class="btn audio-btn" id="recordBtn" title="Record Answer">
+                  <span class="material-icons">mic</span>
+                </button>
+              `;
+          }
+          // For voice-to-text, only show play button
+          if (isVoiceToText) {
+            html += `
+                <button class="btn audio-btn" id="playBtn" title="Play Text">
+                  <span class="material-icons">volume_up</span>
+                </button>
+              `;
+          }
+          audioControls.innerHTML = html;
+          els.card.insertBefore(audioControls, els.gradeBar);
+
+          // Store reference to record button for UI updates
+          speech.audioButton = document.getElementById("recordBtn");
+
+          // Wire up audio control events
+          if (showPlayBtn) {
+            document.getElementById("playBtn").onclick = () => {
+              const dir = els.direction.value;
+              const text = els.front.textContent;
+              const lang = dir.startsWith("es") ? "es" : "en";
+              speak(text, lang);
+            };
+          }
+
+          if (showRecordBtn) {
+            document.getElementById("recordBtn").onclick = () => {
+              if (speech.isListening) {
+                stopListening();
+              } else {
+                const dir = els.direction.value;
+                const lang = dir.includes("es-voice") ? "es" : "en";
+                startListening(lang);
+              }
+            };
+          }
+        }
+      }
+
+      // Add styles for audio controls
+      const styleSheet = document.createElement("style");
+      styleSheet.textContent = `
+        .audio-controls {
+          display: flex;
+          gap: 10px;
+          justify-content: center;
+          margin: 10px 0;
+        }
+        .audio-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          padding: 8px;
+          border-radius: 50%;
+        }
+        .audio-btn.listening {
+          background: var(--danger);
+          animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.1); }
+          100% { transform: scale(1); }
+        }
+        .material-icons {
+          font-size: 24px;
+          line-height: 1;
+        }
+      `;
+      document.head.appendChild(styleSheet);
+
+      // Add Material Icons font
+      const link = document.createElement("link");
+      link.href = "https://fonts.googleapis.com/icon?family=Material+Icons";
+      link.rel = "stylesheet";
+      document.head.appendChild(link);
+
       // ====== Wire UI ======
       function init() {
         renderCategoryList();
         updateStats();
+        addAudioControls();
 
         els.startBtn.onclick = () => {
           buildQueue();
@@ -932,7 +1154,15 @@
           updateStats();
           buildQueue();
         });
-        els.direction.addEventListener("change", () => {});
+        els.direction.addEventListener("change", () => {
+          // Remove existing audio controls
+          const existingControls = document.querySelector(".audio-controls");
+          if (existingControls) {
+            existingControls.remove();
+          }
+          // Add new audio controls based on current direction
+          addAudioControls();
+        });
         els.maxNew.addEventListener("change", () => updateStats());
       }
 
