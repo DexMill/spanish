@@ -1,0 +1,571 @@
+{
+  "title": "Senderos 1A – Lección Preliminar",
+  "categoryOrder": [
+    "Classroom Words",
+    "Time Words", 
+    "Colors",
+    "Days of the Week",
+    "Months",
+    "Numbers",
+    "Weather",
+    "Seasons",
+    "Adjectives"
+  ],
+  "vocabulary": [
+    {
+      "category": "Classroom Words",
+      "spanish": "el bolígrafo",
+      "english": "the pen"
+    },
+    {
+      "category": "Classroom Words",
+      "spanish": "la carpeta",
+      "english": "the folder"
+    },
+    {
+      "category": "Classroom Words",
+      "spanish": "el cuaderno",
+      "english": "the notebook"
+    },
+    {
+      "category": "Classroom Words",
+      "spanish": "el estudiante",
+      "english": "the male student"
+    },
+    {
+      "category": "Classroom Words",
+      "spanish": "la estudiante",
+      "english": "the female student"
+    },
+    {
+      "category": "Classroom Words",
+      "spanish": "la hoja de papel",
+      "english": "the sheet of paper"
+    },
+    {
+      "category": "Classroom Words",
+      "spanish": "el lápiz",
+      "english": "the pencil"
+    },
+    {
+      "category": "Classroom Words",
+      "spanish": "el libro",
+      "english": "the book"
+    },
+    {
+      "category": "Classroom Words",
+      "spanish": "el profesor",
+      "english": "the male teacher"
+    },
+    {
+      "category": "Classroom Words",
+      "spanish": "la profesora",
+      "english": "the female teacher"
+    },
+    {
+      "category": "Classroom Words",
+      "spanish": "el pupitre",
+      "english": "the student desk"
+    },
+    {
+      "category": "Classroom Words",
+      "spanish": "la sala de clases",
+      "english": "the classroom"
+    },
+    {
+      "category": "Time Words",
+      "spanish": "hoy",
+      "english": "today"
+    },
+    {
+      "category": "Time Words",
+      "spanish": "mañana",
+      "english": "tomorrow"
+    },
+    {
+      "category": "Time Words",
+      "spanish": "ayer",
+      "english": "yesterday"
+    },
+    {
+      "category": "Time Words",
+      "spanish": "el día",
+      "english": "the day"
+    },
+    {
+      "category": "Time Words",
+      "spanish": "la semana",
+      "english": "the week"
+    },
+    {
+      "category": "Time Words",
+      "spanish": "el mes",
+      "english": "the month"
+    },
+    {
+      "category": "Time Words",
+      "spanish": "el año",
+      "english": "the year"
+    },
+    {
+      "category": "Colors",
+      "spanish": "rojo",
+      "english": "red"
+    },
+    {
+      "category": "Colors",
+      "spanish": "azul",
+      "english": "blue"
+    },
+    {
+      "category": "Colors",
+      "spanish": "verde",
+      "english": "green"
+    },
+    {
+      "category": "Colors",
+      "spanish": "amarillo",
+      "english": "yellow"
+    },
+    {
+      "category": "Colors",
+      "spanish": "morado",
+      "english": "purple"
+    },
+    {
+      "category": "Colors",
+      "spanish": "anaranjado",
+      "english": "orange"
+    },
+    {
+      "category": "Colors",
+      "spanish": "rosado",
+      "english": "pink"
+    },
+    {
+      "category": "Colors",
+      "spanish": "café",
+      "english": "brown"
+    },
+    {
+      "category": "Colors",
+      "spanish": "negro",
+      "english": "black"
+    },
+    {
+      "category": "Colors",
+      "spanish": "blanco",
+      "english": "white"
+    },
+    {
+      "category": "Colors",
+      "spanish": "gris",
+      "english": "gray"
+    },
+    {
+      "category": "Days of the Week",
+      "spanish": "lunes",
+      "english": "monday"
+    },
+    {
+      "category": "Days of the Week",
+      "spanish": "martes",
+      "english": "tuesday"
+    },
+    {
+      "category": "Days of the Week",
+      "spanish": "miércoles",
+      "english": "wednesday"
+    },
+    {
+      "category": "Days of the Week",
+      "spanish": "jueves",
+      "english": "thursday"
+    },
+    {
+      "category": "Days of the Week",
+      "spanish": "viernes",
+      "english": "friday"
+    },
+    {
+      "category": "Days of the Week",
+      "spanish": "sábado",
+      "english": "saturday"
+    },
+    {
+      "category": "Days of the Week",
+      "spanish": "domingo",
+      "english": "sunday"
+    },
+    {
+      "category": "Months",
+      "spanish": "enero",
+      "english": "january"
+    },
+    {
+      "category": "Months",
+      "spanish": "febrero",
+      "english": "february"
+    },
+    {
+      "category": "Months",
+      "spanish": "marzo",
+      "english": "march"
+    },
+    {
+      "category": "Months",
+      "spanish": "abril",
+      "english": "april"
+    },
+    {
+      "category": "Months",
+      "spanish": "mayo",
+      "english": "may"
+    },
+    {
+      "category": "Months",
+      "spanish": "junio",
+      "english": "june"
+    },
+    {
+      "category": "Months",
+      "spanish": "julio",
+      "english": "july"
+    },
+    {
+      "category": "Months",
+      "spanish": "agosto",
+      "english": "august"
+    },
+    {
+      "category": "Months",
+      "spanish": "septiembre",
+      "english": "september"
+    },
+    {
+      "category": "Months",
+      "spanish": "octubre",
+      "english": "october"
+    },
+    {
+      "category": "Months",
+      "spanish": "noviembre",
+      "english": "november"
+    },
+    {
+      "category": "Months",
+      "spanish": "diciembre",
+      "english": "december"
+    },
+    {
+      "category": "Numbers",
+      "spanish": "uno",
+      "english": "one"
+    },
+    {
+      "category": "Numbers",
+      "spanish": "dos",
+      "english": "two"
+    },
+    {
+      "category": "Numbers",
+      "spanish": "tres",
+      "english": "three"
+    },
+    {
+      "category": "Numbers",
+      "spanish": "cuatro",
+      "english": "four"
+    },
+    {
+      "category": "Numbers",
+      "spanish": "cinco",
+      "english": "five"
+    },
+    {
+      "category": "Numbers",
+      "spanish": "seis",
+      "english": "six"
+    },
+    {
+      "category": "Numbers",
+      "spanish": "siete",
+      "english": "seven"
+    },
+    {
+      "category": "Numbers",
+      "spanish": "ocho",
+      "english": "eight"
+    },
+    {
+      "category": "Numbers",
+      "spanish": "nueve",
+      "english": "nine"
+    },
+    {
+      "category": "Numbers",
+      "spanish": "diez",
+      "english": "ten"
+    },
+    {
+      "category": "Numbers",
+      "spanish": "once",
+      "english": "eleven"
+    },
+    {
+      "category": "Numbers",
+      "spanish": "doce",
+      "english": "twelve"
+    },
+    {
+      "category": "Numbers",
+      "spanish": "trece",
+      "english": "thirteen"
+    },
+    {
+      "category": "Numbers",
+      "spanish": "catorce",
+      "english": "fourteen"
+    },
+    {
+      "category": "Numbers",
+      "spanish": "quince",
+      "english": "fifteen"
+    },
+    {
+      "category": "Numbers",
+      "spanish": "dieciséis",
+      "english": "sixteen"
+    },
+    {
+      "category": "Numbers",
+      "spanish": "diecisiete",
+      "english": "seventeen"
+    },
+    {
+      "category": "Numbers",
+      "spanish": "dieciocho",
+      "english": "eighteen"
+    },
+    {
+      "category": "Numbers",
+      "spanish": "diecinueve",
+      "english": "nineteen"
+    },
+    {
+      "category": "Numbers",
+      "spanish": "veinte",
+      "english": "twenty"
+    },
+    {
+      "category": "Weather",
+      "spanish": "hace sol",
+      "english": "sunny"
+    },
+    {
+      "category": "Weather",
+      "spanish": "llueve",
+      "english": "rainy"
+    },
+    {
+      "category": "Weather",
+      "spanish": "está nublado",
+      "english": "cloudy"
+    },
+    {
+      "category": "Weather",
+      "spanish": "hace viento",
+      "english": "windy"
+    },
+    {
+      "category": "Weather",
+      "spanish": "nieve",
+      "english": "snowy"
+    },
+    {
+      "category": "Weather",
+      "spanish": "hace calor",
+      "english": "hot"
+    },
+    {
+      "category": "Weather",
+      "spanish": "hace frío",
+      "english": "cold"
+    },
+    {
+      "category": "Weather",
+      "spanish": "hace fresco",
+      "english": "cool"
+    },
+    {
+      "category": "Weather",
+      "spanish": "hace buen tiempo",
+      "english": "good weather"
+    },
+    {
+      "category": "Weather",
+      "spanish": "hace mal tiempo",
+      "english": "bad weather"
+    },
+    {
+      "category": "Weather",
+      "spanish": "está mas o menos",
+      "english": "so-so weather"
+    },
+    {
+      "category": "Seasons",
+      "spanish": "la primavera",
+      "english": "spring"
+    },
+    {
+      "category": "Seasons",
+      "spanish": "el verano",
+      "english": "summer"
+    },
+    {
+      "category": "Seasons",
+      "spanish": "el otoño",
+      "english": "fall"
+    },
+    {
+      "category": "Seasons",
+      "spanish": "el invierno",
+      "english": "winter"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "simpático",
+      "english": "nice(male)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "simpática",
+      "english": "nice(female)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "bueno",
+      "english": "good(male)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "buena",
+      "english": "good(female)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "deportista",
+      "english": "sports minded"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "gracioso",
+      "english": "funny(male)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "graciosa",
+      "english": "funny(female)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "inteligente",
+      "english": "smart"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "artístico",
+      "english": "artistic(male)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "artística",
+      "english": "artistic(female)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "atrevido",
+      "english": "daring(male)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "atrevida",
+      "english": "daring(female)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "desordenado",
+      "english": "disorganized(male)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "desordenada",
+      "english": "disorganized(female)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "ordenado",
+      "english": "organized(male)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "ordenada",
+      "english": "organized(female)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "reservado",
+      "english": "shy/reserved(male)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "reservada",
+      "english": "shy/reserved(female)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "serio",
+      "english": "serious(male)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "seria",
+      "english": "serious(female)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "talentoso",
+      "english": "talented(male)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "talentosa",
+      "english": "talented(female)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "sociable",
+      "english": "sociable"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "estudioso",
+      "english": "good student(male)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "estudiosa",
+      "english": "good student(female)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "trabajador",
+      "english": "hard working(male)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "trabajadora",
+      "english": "hard working(female)"
+    }
+  ]
+}
