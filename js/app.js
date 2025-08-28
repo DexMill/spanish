@@ -41,8 +41,10 @@ class SpanishAnkiApp {
       direction: document.getElementById("direction"),
       maxNew: document.getElementById("maxNew"),
       resetBtn: document.getElementById("resetBtn"),
+      resetCardsBtn: document.getElementById("resetCardsBtn"),
       exportBtn: document.getElementById("exportBtn"),
       importFile: document.getElementById("importFile"),
+      importCardsFile: document.getElementById("importCardsFile"),
       answerInput: document.getElementById("answerInput"),
     };
 
@@ -60,11 +62,58 @@ class SpanishAnkiApp {
 
   async loadVocabulary() {
     try {
+      // Load base vocabulary
       const response = await fetch("./data/vocabulary.json");
       this.vocabulary = await response.json();
+
+      // Load stored cards from localStorage
+      const storedCards = localStorage.getItem("importedCards");
+      if (storedCards) {
+        const importedData = JSON.parse(storedCards);
+
+        // Merge categories
+        const newCategories = importedData.categoryOrder.filter(
+          (cat) => !this.vocabulary.categoryOrder.includes(cat)
+        );
+        this.vocabulary.categoryOrder = [
+          ...this.vocabulary.categoryOrder,
+          ...newCategories,
+        ];
+
+        // Merge vocabulary items
+        this.vocabulary.vocabulary = [
+          ...this.vocabulary.vocabulary,
+          ...importedData.vocabulary,
+        ];
+      }
     } catch (error) {
       console.error("Failed to load vocabulary:", error);
       alert("Failed to load vocabulary data. Please refresh the page.");
+    }
+  }
+
+  saveImportedCards() {
+    const storedCards = localStorage.getItem("importedCards");
+    let importedData = storedCards
+      ? JSON.parse(storedCards)
+      : { categoryOrder: [], vocabulary: [] };
+
+    return importedData;
+  }
+
+  resetCards() {
+    if (
+      confirm(
+        "Are you sure you want to remove all imported cards? This cannot be undone."
+      )
+    ) {
+      localStorage.removeItem("importedCards");
+      this.loadVocabulary().then(() => {
+        this.setupCards();
+        this.renderCategoryList();
+        this.updateStats();
+        alert("All imported cards have been removed!");
+      });
     }
   }
 
@@ -338,6 +387,76 @@ class SpanishAnkiApp {
     reader.readAsText(file);
   }
 
+  importCards(file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const data = JSON.parse(reader.result);
+        if (
+          typeof data === "object" &&
+          data &&
+          Array.isArray(data.vocabulary) &&
+          Array.isArray(data.categoryOrder)
+        ) {
+          // Merge categories
+          const newCategories = data.categoryOrder.filter(
+            (cat) => !this.vocabulary.categoryOrder.includes(cat)
+          );
+          this.vocabulary.categoryOrder = [
+            ...this.vocabulary.categoryOrder,
+            ...newCategories,
+          ];
+
+          // Create a set of existing card IDs to avoid duplicates
+          const existingCardIds = new Set(this.cards.map((card) => card.id));
+
+          // Merge vocabulary items
+          const newVocabulary = data.vocabulary.filter((item) => {
+            const id = `${item.category}::${item.spanish}::${item.english}`;
+            return !existingCardIds.has(id);
+          });
+
+          // Save to localStorage
+          const storedCards = localStorage.getItem("importedCards");
+          let importedData = storedCards
+            ? JSON.parse(storedCards)
+            : { categoryOrder: [], vocabulary: [] };
+
+          importedData.categoryOrder = [
+            ...new Set([...importedData.categoryOrder, ...newCategories]),
+          ];
+          importedData.vocabulary = [
+            ...importedData.vocabulary,
+            ...newVocabulary,
+          ];
+
+          localStorage.setItem("importedCards", JSON.stringify(importedData));
+
+          this.vocabulary.vocabulary = [
+            ...this.vocabulary.vocabulary,
+            ...newVocabulary,
+          ];
+
+          // Update cards array
+          this.setupCards();
+          this.renderCategoryList();
+          this.updateStats();
+
+          alert(
+            `Successfully imported ${newVocabulary.length} new cards and ${newCategories.length} new categories!`
+          );
+        } else {
+          throw new Error(
+            "Invalid file format. File must contain 'vocabulary' and 'categoryOrder' arrays."
+          );
+        }
+      } catch (e) {
+        alert("Import failed: " + e.message);
+      }
+    };
+    reader.readAsText(file);
+  }
+
   resetProgress() {
     if (confirm("Reset all spaced-repetition data for this deck?")) {
       this.scheduleData = {};
@@ -497,10 +616,16 @@ class SpanishAnkiApp {
 
     // Settings events
     this.elements.resetBtn.onclick = () => this.resetProgress();
+    this.elements.resetCardsBtn.onclick = () => this.resetCards();
     this.elements.exportBtn.onclick = () => this.exportProgress();
     this.elements.importFile.onchange = (e) => {
       const file = e.target.files[0];
       if (file) this.importProgress(file);
+    };
+
+    this.elements.importCardsFile.onchange = (e) => {
+      const file = e.target.files[0];
+      if (file) this.importCards(file);
     };
 
     // Category and settings changes

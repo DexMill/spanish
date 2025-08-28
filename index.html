@@ -66,12 +66,32 @@
               accept="application/json"
               style="display: none"
             />
+            <label
+              class="btn outline"
+              for="importCardsFile"
+              style="cursor: pointer"
+            >
+              Import Cards
+            </label>
+            <input
+              id="importCardsFile"
+              type="file"
+              accept="application/json"
+              style="display: none"
+            />
             <button
               class="btn danger"
               id="resetBtn"
               title="Clears all scheduling data"
             >
               Reset Progress
+            </button>
+            <button
+              class="btn danger"
+              id="resetCardsBtn"
+              title="Removes all imported cards"
+            >
+              Reset Cards
             </button>
           </div>
         </div>
