@@ -161,6 +161,11 @@
       .front {
         font-size: 28px;
       }
+      .front.muted {
+        font-size: 20px;
+        color: var(--muted);
+        font-style: italic;
+      }
       .back {
         font-size: 22px;
         color: #d1e0ff;
@@ -792,7 +797,16 @@
 
         // Update UI elements
         els.cardMeta.textContent = `${current.cat}`;
-        els.front.textContent = front;
+
+        // In voice-to-text modes, hide the text and show a prompt
+        if (dir.includes("-voice-")) {
+          els.front.textContent = "Click the speaker icon to hear the word";
+          els.front.classList.add("muted");
+        } else {
+          els.front.textContent = front;
+          els.front.classList.remove("muted");
+        }
+
         els.back.textContent = back;
         els.back.classList.add("hidden");
         els.gradeBar.classList.add("hidden");
@@ -823,10 +837,17 @@
       }
 
       function normalizeAnswer(text) {
-        return text
-          .toLowerCase()
-          .trim()
-          .replace(/[.,!?]/g, "");
+        return (
+          text
+            .toLowerCase()
+            .trim()
+            // Remove punctuation
+            .replace(/[.,!?]/g, "")
+            // Remove gender indicators in parentheses
+            .replace(/\s*\([^)]*\)/g, "")
+            // Remove the word "male" or "female" at the end
+            .replace(/\s+(male|female)$/g, "")
+        );
       }
 
       function showAnswer() {
@@ -955,8 +976,7 @@
       // ====== Speech API Integration ======
       const speech = {
         synthesis: window.speechSynthesis,
-        recognition: new (window.SpeechRecognition ||
-          window.webkitSpeechRecognition)(),
+        recognition: null,
         voices: {
           es: null,
           en: null,
@@ -964,6 +984,21 @@
         isListening: false,
         audioButton: null,
       };
+
+      // Initialize speech recognition if available
+      try {
+        const SpeechRecognition =
+          window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SpeechRecognition) {
+          speech.recognition = new SpeechRecognition();
+          speech.recognition.continuous = false;
+          speech.recognition.interimResults = false;
+        } else {
+          console.error("Speech recognition not supported in this browser");
+        }
+      } catch (e) {
+        console.error("Error initializing speech recognition:", e);
+      }
 
       // Initialize speech synthesis voices
       function initVoices() {
@@ -1010,21 +1045,28 @@
         }
       }
 
-      // Handle speech recognition results
-      speech.recognition.onresult = (event) => {
-        const result = event.results[0][0].transcript.toLowerCase();
-        els.answerInput.value = result;
-        stopListening();
-      };
+      function setupSpeechRecognition() {
+        if (!speech.recognition) return;
 
-      speech.recognition.onend = () => {
-        stopListening();
-      };
+        // Handle speech recognition results
+        speech.recognition.onresult = (event) => {
+          const result = event.results[0][0].transcript.toLowerCase();
+          els.answerInput.value = result;
+          stopListening();
+          // Automatically check answer after recording
+          showAnswer();
+        };
 
-      speech.recognition.onerror = (event) => {
-        console.error("Speech recognition error:", event.error);
-        stopListening();
-      };
+        speech.recognition.onend = () => {
+          stopListening();
+        };
+
+        speech.recognition.onerror = (event) => {
+          console.error("Speech recognition error:", event.error);
+          stopListening();
+          alert("Speech recognition error. Please try again.");
+        };
+      }
 
       // Add audio controls to the card
       function addAudioControls() {
@@ -1061,17 +1103,21 @@
           speech.audioButton = document.getElementById("recordBtn");
 
           // Wire up audio control events
-          if (showPlayBtn) {
-            document.getElementById("playBtn").onclick = () => {
+          const playBtn = document.getElementById("playBtn");
+          const recordBtn = document.getElementById("recordBtn");
+
+          if (playBtn) {
+            playBtn.onclick = () => {
               const dir = els.direction.value;
-              const text = els.front.textContent;
+              // Get the correct text from the current card
+              const text = dir.startsWith("es") ? current.es : current.en;
               const lang = dir.startsWith("es") ? "es" : "en";
               speak(text, lang);
             };
           }
 
-          if (showRecordBtn) {
-            document.getElementById("recordBtn").onclick = () => {
+          if (recordBtn) {
+            recordBtn.onclick = () => {
               if (speech.isListening) {
                 stopListening();
               } else {
@@ -1128,6 +1174,7 @@
       function init() {
         renderCategoryList();
         updateStats();
+        setupSpeechRecognition();
         addAudioControls();
 
         els.startBtn.onclick = () => {
