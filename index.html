@@ -24,7 +24,22 @@
       <aside>
         <div class="section">
           <h3>Study Scope</h3>
-          <div class="categories" id="categoryList"></div>
+          <div id="categoryContainer">
+            <div class="categories" id="categoryList"></div>
+            <div class="category-controls">
+              <button class="btn outline" id="allOffBtn">All Off</button>
+              <button class="btn outline" id="allOnBtn">All On</button>
+              <button class="btn outline" id="dueNowBtn">Review Due Now</button>
+            </div>
+          </div>
+          <div id="dueNowContainer" class="hidden">
+            <div class="categories" id="dueNowList"></div>
+            <div class="category-controls">
+              <button class="btn outline" id="backToAllBtn">
+                Back to All Categories
+              </button>
+            </div>
+          </div>
         </div>
         <div class="section controls">
           <h3>Settings</h3>

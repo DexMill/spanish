@@ -97,6 +97,19 @@ main {
   max-height: 300px;
   overflow: auto;
   padding-right: 4px;
+  margin-bottom: 12px;
+}
+
+.category-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.category-controls .btn {
+  font-size: 12px;
+  padding: 8px 10px;
 }
 
 .cat {
@@ -335,9 +348,15 @@ a {
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .material-icons {

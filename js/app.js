@@ -46,6 +46,13 @@ class SpanishAnkiApp {
       importFile: document.getElementById("importFile"),
       importCardsFile: document.getElementById("importCardsFile"),
       answerInput: document.getElementById("answerInput"),
+      allOffBtn: document.getElementById("allOffBtn"),
+      allOnBtn: document.getElementById("allOnBtn"),
+      dueNowBtn: document.getElementById("dueNowBtn"),
+      backToAllBtn: document.getElementById("backToAllBtn"),
+      categoryContainer: document.getElementById("categoryContainer"),
+      dueNowContainer: document.getElementById("dueNowContainer"),
+      dueNowList: document.getElementById("dueNowList"),
     };
 
     this.init();
@@ -141,7 +148,7 @@ class SpanishAnkiApp {
       const wrap = document.createElement("label");
       wrap.className = "cat";
       wrap.innerHTML = `
-        <input type="checkbox" id="${id}" data-cat="${cat}" checked />
+        <input type="checkbox" id="${id}" data-cat="${cat}" />
         <span>${cat}</span>
       `;
       this.elements.categoryList.appendChild(wrap);
@@ -153,11 +160,19 @@ class SpanishAnkiApp {
   }
 
   getSelectedCategories() {
-    return Array.from(
+    // Get checked categories from both the main list and due now list
+    const mainListChecked = Array.from(
       this.elements.categoryList.querySelectorAll(
         'input[type="checkbox"]:checked'
       )
-    ).map((i) => i.dataset.cat);
+    );
+    const dueNowListChecked = Array.from(
+      this.elements.dueNowList.querySelectorAll(
+        'input[type="checkbox"]:checked'
+      )
+    );
+
+    return [...mainListChecked, ...dueNowListChecked].map((i) => i.dataset.cat);
   }
 
   buildQueue() {
@@ -639,6 +654,66 @@ class SpanishAnkiApp {
     });
 
     this.elements.maxNew.addEventListener("change", () => this.updateStats());
+
+    // Category control buttons
+    this.elements.allOffBtn.onclick = () => {
+      const checkboxes = this.elements.categoryList.querySelectorAll(
+        'input[type="checkbox"]'
+      );
+      checkboxes.forEach((checkbox) => (checkbox.checked = false));
+      this.updateStats();
+      this.buildQueue();
+    };
+
+    this.elements.allOnBtn.onclick = () => {
+      const checkboxes = this.elements.categoryList.querySelectorAll(
+        'input[type="checkbox"]'
+      );
+      checkboxes.forEach((checkbox) => (checkbox.checked = true));
+      this.updateStats();
+      this.buildQueue();
+    };
+
+    this.elements.dueNowBtn.onclick = () => {
+      const now = Date.now();
+
+      // Get categories with due cards
+      const dueCategories = this.getCategories().filter((category) =>
+        this.cards.some((card) => {
+          const schedule = this.scheduleData[card.id];
+          return card.category === category && schedule && schedule.due <= now;
+        })
+      );
+
+      // Clear and populate the due now list
+      this.elements.dueNowList.innerHTML = "";
+      dueCategories.forEach((cat) => {
+        const id = "due_cat_" + cat.replace(/\W+/g, "_");
+        const wrap = document.createElement("label");
+        wrap.className = "cat";
+        wrap.innerHTML = `
+          <input type="checkbox" id="${id}" data-cat="${cat}" checked />
+          <span>${cat}</span>
+        `;
+        this.elements.dueNowList.appendChild(wrap);
+      });
+
+      // Switch to due now view
+      this.elements.categoryContainer.classList.add("hidden");
+      this.elements.dueNowContainer.classList.remove("hidden");
+
+      this.updateStats();
+      this.buildQueue();
+    };
+
+    this.elements.backToAllBtn.onclick = () => {
+      // Switch back to all categories view
+      this.elements.dueNowContainer.classList.add("hidden");
+      this.elements.categoryContainer.classList.remove("hidden");
+
+      this.updateStats();
+      this.buildQueue();
+    };
 
     // Speaker button for Spanish TTS
     const speakBtn = document.getElementById("speakBtn");
