@@ -275,6 +275,16 @@
         border-color: var(--danger);
         background: rgba(239, 68, 68, 0.1);
       }
+
+      /* Hide speaker button by default */
+      #speakBtn {
+        display: none;
+      }
+
+      /* Show speaker button when answer is revealed */
+      .card:has(.back:not(.hidden)) #speakBtn {
+        display: block;
+      }
     </style>
   </head>
   <body>
