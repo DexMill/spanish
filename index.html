@@ -1156,10 +1156,11 @@
             : current.en;
           const normalizedExpected = normalizeAnswer(expectedAnswer);
 
-          // Determine if we're dealing with numbers
+          // Determine if we're dealing with numbers - only use number logic for the Numbers category
           const isNumber =
-            /^\d+$/.test(normalizedExpected) ||
-            Object.values(numberWords).includes(normalizedExpected);
+            current.cat === "Numbers" &&
+            (/^\d+$/.test(normalizedExpected) ||
+              Object.values(numberWords).includes(normalizedExpected));
 
           if (isNumber) {
             // For numbers, convert everything to word format based on language
