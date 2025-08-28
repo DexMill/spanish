@@ -836,18 +836,97 @@
               }${sc.isLeech ? " · ⚠️ Difficult Card" : ""}${responseTimeText}`;
       }
 
+      // Number word to digit mapping (both English and Spanish)
+      const numberWords = {
+        // English
+        one: "1",
+        two: "2",
+        three: "3",
+        four: "4",
+        five: "5",
+        six: "6",
+        seven: "7",
+        eight: "8",
+        nine: "9",
+        ten: "10",
+        eleven: "11",
+        twelve: "12",
+        thirteen: "13",
+        fourteen: "14",
+        fifteen: "15",
+        sixteen: "16",
+        seventeen: "17",
+        eighteen: "18",
+        nineteen: "19",
+        twenty: "20",
+        // Spanish (with common speech recognition variations)
+        uno: "1",
+        un: "1",
+        dos: "2",
+        dose: "2", // common misrecognition
+        tres: "3",
+        trace: "3", // common misrecognition
+        cuatro: "4",
+        cinco: "5",
+        seis: "6",
+        sais: "6", // common misrecognition
+        siete: "7",
+        ocho: "8",
+        nueve: "9",
+        diez: "10",
+        dies: "10", // common misrecognition
+        once: "11",
+        doce: "12",
+        trece: "13",
+        trace: "13", // common misrecognition
+        catorce: "14",
+        quince: "15",
+        dieciseis: "16",
+        dieciséis: "16",
+        "dieci seis": "16", // sometimes recognized with space
+        diecisiete: "17",
+        "dieci siete": "17",
+        dieciocho: "18",
+        "dieci ocho": "18",
+        diecinueve: "19",
+        "dieci nueve": "19",
+        veinte: "20",
+        vente: "20", // common misrecognition
+        // Additional variations for compound numbers
+        "diez y seis": "16",
+        "diez y siete": "17",
+        "diez y ocho": "18",
+        "diez y nueve": "19",
+      };
+
+      // Digit to word mapping (reverse of numberWords)
+      const digitWords = Object.fromEntries(
+        Object.entries(numberWords).map(([word, digit]) => [digit, word])
+      );
+
       function normalizeAnswer(text) {
-        return (
-          text
-            .toLowerCase()
-            .trim()
-            // Remove punctuation
-            .replace(/[.,!?]/g, "")
-            // Remove gender indicators in parentheses
-            .replace(/\s*\([^)]*\)/g, "")
-            // Remove the word "male" or "female" at the end
-            .replace(/\s+(male|female)$/g, "")
-        );
+        let normalized = text
+          .toLowerCase()
+          .trim()
+          // Remove punctuation
+          .replace(/[.,!?]/g, "")
+          // Remove gender indicators in parentheses
+          .replace(/\s*\([^)]*\)/g, "")
+          // Remove the word "male" or "female" at the end
+          .replace(/\s+(male|female)$/g, "")
+          // Normalize Spanish accents
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "");
+
+        // Convert number words to digits
+        const asDigit = numberWords[normalized];
+        if (asDigit) return asDigit;
+
+        // Convert digits to number words
+        const asWord = digitWords[normalized];
+        if (asWord) return asWord;
+
+        return normalized;
       }
 
       function showAnswer() {
@@ -1028,10 +1107,18 @@
 
       function startListening(lang) {
         if (speech.isListening) return;
-        // Use more specific language codes for better recognition
-        speech.recognition.lang = lang === "es" ? "es-ES" : "en-US";
-        // Configure for single word recognition
-        speech.recognition.maxAlternatives = 5; // Get multiple alternatives
+
+        // Configure recognition based on language
+        if (lang === "es") {
+          // For Spanish, try multiple regional variants
+          speech.recognition.lang = "es-ES"; // Spain Spanish
+          // More alternatives for Spanish to handle variations
+          speech.recognition.maxAlternatives = 10;
+        } else {
+          speech.recognition.lang = "en-US";
+          speech.recognition.maxAlternatives = 5;
+        }
+
         speech.recognition.start();
         speech.isListening = true;
         if (speech.audioButton) {
@@ -1069,13 +1156,78 @@
             : current.en;
           const normalizedExpected = normalizeAnswer(expectedAnswer);
 
-          // Find if any alternative matches
-          const matchingAlt = alternatives.find(
-            (alt) => alt === normalizedExpected
-          );
+          // Determine if we're dealing with numbers
+          const isNumber =
+            /^\d+$/.test(normalizedExpected) ||
+            Object.values(numberWords).includes(normalizedExpected);
 
-          // Use the matching alternative if found, otherwise use the first one
-          els.answerInput.value = matchingAlt || alternatives[0];
+          if (isNumber) {
+            // For numbers, convert everything to word format based on language
+            const isSpanish =
+              dir.includes("es-voice") ||
+              (dir.endsWith("-voice") && dir.startsWith("en-"));
+
+            // Convert all alternatives to numbers first
+            const numberAlts = alternatives.map((alt) => {
+              // If it's a digit, return it
+              if (/^\d+$/.test(alt)) return alt;
+              // If it's a word (in either language), get its number
+              return numberWords[alt] || alt;
+            });
+
+            // Then convert the expected answer to a number if it's a word
+            const expectedNumber = /^\d+$/.test(normalizedExpected)
+              ? normalizedExpected
+              : numberWords[normalizedExpected];
+
+            // Find a matching number
+            const matchingNumber = numberAlts.find(
+              (alt) => alt === expectedNumber
+            );
+
+            if (matchingNumber) {
+              // Convert back to the appropriate word form
+              if (isSpanish) {
+                // Find Spanish word for this number
+                const spanishWord = Object.entries(numberWords).find(
+                  ([word, num]) =>
+                    num === matchingNumber && /[aeiouáéíóú]/.test(word)
+                )[0];
+                els.answerInput.value = spanishWord;
+              } else {
+                // Find English word for this number
+                const englishWord = Object.entries(numberWords).find(
+                  ([word, num]) =>
+                    num === matchingNumber && !/[aeiouáéíóú]/.test(word)
+                )[0];
+                els.answerInput.value = englishWord;
+              }
+            } else {
+              // If no match, convert first alternative to appropriate language
+              const firstNumber = numberAlts[0];
+              if (isSpanish) {
+                const spanishWord =
+                  Object.entries(numberWords).find(
+                    ([word, num]) =>
+                      num === firstNumber && /[aeiouáéíóú]/.test(word)
+                  )?.[0] || alternatives[0];
+                els.answerInput.value = spanishWord;
+              } else {
+                const englishWord =
+                  Object.entries(numberWords).find(
+                    ([word, num]) =>
+                      num === firstNumber && !/[aeiouáéíóú]/.test(word)
+                  )?.[0] || alternatives[0];
+                els.answerInput.value = englishWord;
+              }
+            }
+          } else {
+            // For non-numbers, use direct matching
+            const matchingAlt = alternatives.find(
+              (alt) => alt === normalizedExpected
+            );
+            els.answerInput.value = matchingAlt || alternatives[0];
+          }
           stopListening();
           // Automatically check answer after recording
           showAnswer();
