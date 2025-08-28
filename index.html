@@ -224,6 +224,7 @@
       }
 
       input[type="number"],
+      input[type="text"],
       select {
         background: #0f1628;
         border: 1px solid #293356;
@@ -244,6 +245,24 @@
       }
       a {
         color: #a8c0ff;
+      }
+
+      .answer-input {
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      .answer-input.correct {
+        border-color: var(--accent2);
+        background: rgba(54, 211, 153, 0.1);
+      }
+
+      .answer-input.incorrect {
+        border-color: var(--danger);
+        background: rgba(239, 68, 68, 0.1);
       }
     </style>
   </head>
@@ -317,7 +336,15 @@
           <div class="back hidden" id="back"></div>
           <div class="small" id="hint"></div>
           <div class="row">
-            <button class="btn" id="flipBtn">Show Answer (Space)</button>
+            <input
+              type="text"
+              id="answerInput"
+              class="answer-input"
+              placeholder="Type your answer..."
+            />
+          </div>
+          <div class="row">
+            <button class="btn" id="flipBtn">Check Answer (Enter)</button>
           </div>
           <div class="grade-bar hidden" id="gradeBar">
             <button class="grade g-again" data-grade="1">Again</button>
@@ -590,12 +617,14 @@
         resetBtn: document.getElementById("resetBtn"),
         exportBtn: document.getElementById("exportBtn"),
         importFile: document.getElementById("importFile"),
+        answerInput: document.getElementById("answerInput"),
       };
 
       let sched = S.load();
       let queue = []; // ordered list of card IDs for this session
       let current = null; // current card object
       let seenThisSession = 0;
+      let cardStartTime = 0; // timestamp when card was shown
 
       function unique(arr) {
         return Array.from(new Set(arr));
@@ -696,6 +725,8 @@
             els.front.textContent = "";
             els.back.textContent = "";
             els.gradeBar.classList.add("hidden");
+            els.answerInput.value = "";
+            els.answerInput.classList.remove("correct", "incorrect");
             return;
           }
         }
@@ -715,6 +746,10 @@
         els.back.textContent = back;
         els.back.classList.add("hidden");
         els.gradeBar.classList.add("hidden");
+        els.answerInput.value = "";
+        els.answerInput.classList.remove("correct", "incorrect");
+        els.answerInput.focus();
+        cardStartTime = now();
         els.hint.textContent =
           sc.reps === 0
             ? "New card"
@@ -723,9 +758,27 @@
               }`;
       }
 
+      function normalizeAnswer(text) {
+        return text
+          .toLowerCase()
+          .trim()
+          .replace(/[.,!?]/g, "");
+      }
+
       function showAnswer() {
+        const userAnswer = normalizeAnswer(els.answerInput.value);
+        const correctAnswer = normalizeAnswer(els.back.textContent);
+        const isCorrect = userAnswer === correctAnswer;
+        const responseTime = now() - cardStartTime;
+
         els.back.classList.remove("hidden");
         els.gradeBar.classList.remove("hidden");
+        els.answerInput.classList.add(isCorrect ? "correct" : "incorrect");
+
+        // Auto-easy if correct answer within 7 seconds
+        if (isCorrect && responseTime < 7000) {
+          onGrade(4); // Easy
+        }
       }
 
       function onGrade(grade) {
@@ -786,9 +839,9 @@
 
       // ====== Keyboard Shortcuts ======
       document.addEventListener("keydown", (e) => {
-        if (e.code === "Space") {
+        if (e.code === "Enter" && els.back.classList.contains("hidden")) {
           e.preventDefault();
-          if (els.back.classList.contains("hidden")) showAnswer();
+          showAnswer();
         }
         if (!els.back.classList.contains("hidden")) {
           if (e.key === "1") onGrade(1);
