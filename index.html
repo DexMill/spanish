@@ -1028,7 +1028,10 @@
 
       function startListening(lang) {
         if (speech.isListening) return;
+        // Use more specific language codes for better recognition
         speech.recognition.lang = lang === "es" ? "es-ES" : "en-US";
+        // Configure for single word recognition
+        speech.recognition.maxAlternatives = 5; // Get multiple alternatives
         speech.recognition.start();
         speech.isListening = true;
         if (speech.audioButton) {
@@ -1050,8 +1053,29 @@
 
         // Handle speech recognition results
         speech.recognition.onresult = (event) => {
-          const result = event.results[0][0].transcript.toLowerCase();
-          els.answerInput.value = result;
+          // Get all alternatives from the first result
+          const alternatives = Array.from(event.results[0]).map((result) =>
+            normalizeAnswer(result.transcript)
+          );
+
+          // Get the expected answer
+          const dir = els.direction.value;
+          const expectedAnswer = dir.endsWith("-voice")
+            ? dir.startsWith("en-")
+              ? current.es
+              : current.en
+            : dir.startsWith("es-")
+            ? current.es
+            : current.en;
+          const normalizedExpected = normalizeAnswer(expectedAnswer);
+
+          // Find if any alternative matches
+          const matchingAlt = alternatives.find(
+            (alt) => alt === normalizedExpected
+          );
+
+          // Use the matching alternative if found, otherwise use the first one
+          els.answerInput.value = matchingAlt || alternatives[0];
           stopListening();
           // Automatically check answer after recording
           showAnswer();
@@ -1122,7 +1146,15 @@
                 stopListening();
               } else {
                 const dir = els.direction.value;
-                const lang = dir.includes("es-voice") ? "es" : "en";
+                // For text-to-voice modes, we need to speak the second language
+                // For voice-to-text modes, we need to speak the first language
+                const lang = dir.endsWith("-voice")
+                  ? dir.startsWith("en-")
+                    ? "es"
+                    : "en" // text-to-voice: speak the second language
+                  : dir.startsWith("es-")
+                  ? "es"
+                  : "en"; // voice-to-text: speak the first language
                 startListening(lang);
               }
             };
