@@ -363,3 +363,136 @@ a {
   font-size: 24px;
   line-height: 1;
 }
+
+/* Help Button */
+.help-btn {
+  padding: 8px;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a2140;
+  margin-left: 8px;
+}
+
+.help-btn:hover {
+  background: #2a355c;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: var(--panel);
+  border: 1px solid #1f2740;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid #1f2740;
+  position: sticky;
+  top: 0;
+  background: var(--panel);
+  z-index: 1;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 20px;
+  color: var(--text);
+}
+
+.close-btn {
+  padding: 8px;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.close-btn:hover {
+  background: #2a355c;
+}
+
+.modal-body {
+  padding: 24px;
+}
+
+.modal-body section {
+  margin-bottom: 24px;
+}
+
+.modal-body h3 {
+  color: var(--text);
+  margin: 0 0 12px;
+  font-size: 16px;
+}
+
+.modal-body p {
+  margin: 0 0 12px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.modal-body ul {
+  margin: 0;
+  padding-left: 24px;
+  list-style-type: disc;
+}
+
+.modal-body li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.modal-body strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.modal-body li.code-block {
+  list-style: none;
+  margin-left: -24px;
+}
+
+.modal-body pre {
+  background: #0f1628;
+  border: 1px solid #1f2740;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 8px 0;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #a8c0ff;
+}

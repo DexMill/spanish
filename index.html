@@ -17,6 +17,9 @@
         <span class="chip">Local-first</span>
         <span class="chip">Spaced Repetition</span>
         <span class="chip">By Category</span>
+        <button class="btn help-btn" id="helpBtn" title="App Help">
+          <span class="material-icons">help_outline</span>
+        </button>
       </div>
     </header>
 
@@ -66,7 +69,7 @@
             </label>
             <label>
               Max New / Session:
-              <input id="maxNew" type="number" value="999" min="1" />
+              <input id="maxNew" type="number" value="15" min="1" />
             </label>
           </div>
           <div class="row">
@@ -159,6 +162,167 @@
           can export/import JSON anytime.
         </div>
       </main>
+    </div>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>App Help & Features</h2>
+          <button class="btn close-btn" id="closeHelpBtn">
+            <span class="material-icons">close</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <section>
+            <h3>Getting Started</h3>
+            <p>
+              This is a spaced repetition flashcard app for learning Spanish
+              vocabulary. It uses an intelligent scheduling system to help you
+              learn efficiently. <br /><h4>How to use</h4>You start by choosing the categories and
+              direction(Spanish text - English text) then click Start/Resume to
+              begin practicing. Press enter to check your answer then either click enter again to auto select your recommended grade(recommended)
+              or you can grade your self based on how easy that card is.
+            </p>
+          </section>
+
+          <section>
+            <h3>Study Modes</h3>
+            <ul>
+              <li>
+                <strong>Spanish → English Text:</strong> See Spanish text, type
+                English translation
+              </li>
+              <li>
+                <strong>English → Spanish Text:</strong> See English text, type
+                Spanish translation
+              </li>
+              <li>
+                <strong>Spanish Text → English Voice:</strong> See Spanish text,
+                speak English translation
+              </li>
+              <li>
+                <strong>English Text → Spanish Voice:</strong> See English text,
+                speak Spanish translation
+              </li>
+              <li>
+                <strong>Spanish Voice → English Text:</strong> Hear Spanish
+                audio, type English translation
+              </li>
+              <li>
+                <strong>English Voice → Spanish Text:</strong> Hear English
+                audio, type Spanish translation
+              </li>
+              <li><strong>Mix:</strong> Randomly mix all study modes</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Spaced Repetition System</h3>
+            <p>
+              The app uses a modified version of the SM-2 algorithm for spaced
+              repetition:
+            </p>
+            <ul>
+              <li>
+                <strong>Again (1):</strong> Card was forgotten - review in 1
+                minute
+              </li>
+              <li>
+                <strong>Hard (2):</strong> Difficult to recall - shorter
+                interval
+              </li>
+              <li>
+                <strong>Good (3):</strong> Successfully recalled - normal
+                interval
+              </li>
+              <li><strong>Easy (4):</strong> Very easy - longer interval</li>
+            </ul>
+            <p>
+              Cards marked as "Again" 8 times are flagged as "Difficult Card"
+              for extra attention.
+            </p>
+          </section>
+
+          <section>
+            <h3>Managing Cards</h3>
+            <ul>
+              <li>
+                <strong>Import Cards:</strong> Add new vocabulary cards via JSON
+                file. The JSON file must have this format:
+              </li>
+              <li class="code-block">
+<pre>{
+  "categoryOrder": ["Category"],
+  "vocabulary": [
+    {
+      "category": "Category",
+      "spanish": "spanish",
+      "english": "english"
+    }
+  ]
+}</pre>
+              </li>
+              <li>
+                <strong>Import Progress:</strong> Restore your learning progress
+                from a backup
+              </li>
+              <li>
+                <strong>Export Progress:</strong> Save your learning progress as
+                JSON
+              </li>
+              <li>
+                <strong>Reset Progress:</strong> Clear all learning history
+              </li>
+              <li><strong>Reset Cards:</strong> Remove all imported cards</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Study Categories</h3>
+            <ul>
+              <li>Select specific categories to study</li>
+              <li>Use "All On/Off" to quickly toggle all categories</li>
+              <li>
+                "Review Due Now" shows only categories with cards due for review
+              </li>
+              <li>
+                Set "Max New / Session" to control how many new cards to
+                introduce
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Keyboard Shortcuts</h3>
+            <ul>
+              <li>
+                <strong>Enter:</strong> Check answer or grade card (uses
+                suggested grade)
+              </li>
+              <li>
+                <strong>1-4:</strong> Grade card (1=Again, 2=Hard, 3=Good,
+                4=Easy)
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Voice Features</h3>
+            <ul>
+              <li>Click the speaker icon to hear Spanish pronunciation</li>
+              <li>Use the microphone icon to record your spoken answers</li>
+              <li>Voice recognition supports both Spanish and English</li>
+            </ul>
+          </section>
+          <section>
+            <h5>
+            <p>
+              Created by Dexter Miller
+            </p>
+          </section>
+        </div>
+      </div>
     </div>
 
     <script type="module" src="./js/app.js"></script>

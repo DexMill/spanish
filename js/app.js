@@ -53,6 +53,9 @@ class SpanishAnkiApp {
       categoryContainer: document.getElementById("categoryContainer"),
       dueNowContainer: document.getElementById("dueNowContainer"),
       dueNowList: document.getElementById("dueNowList"),
+      helpBtn: document.getElementById("helpBtn"),
+      helpModal: document.getElementById("helpModal"),
+      closeHelpBtn: document.getElementById("closeHelpBtn"),
     };
 
     this.init();
@@ -714,6 +717,32 @@ class SpanishAnkiApp {
       this.updateStats();
       this.buildQueue();
     };
+
+    // Help button and modal
+    this.elements.helpBtn.onclick = () => {
+      this.elements.helpModal.classList.remove("hidden");
+    };
+
+    this.elements.closeHelpBtn.onclick = () => {
+      this.elements.helpModal.classList.add("hidden");
+    };
+
+    // Close modal when clicking outside
+    this.elements.helpModal.onclick = (e) => {
+      if (e.target === this.elements.helpModal) {
+        this.elements.helpModal.classList.add("hidden");
+      }
+    };
+
+    // Close modal with Escape key
+    document.addEventListener("keydown", (e) => {
+      if (
+        e.key === "Escape" &&
+        !this.elements.helpModal.classList.contains("hidden")
+      ) {
+        this.elements.helpModal.classList.add("hidden");
+      }
+    });
 
     // Speaker button for Spanish TTS
     const speakBtn = document.getElementById("speakBtn");
