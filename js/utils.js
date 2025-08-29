@@ -87,9 +87,8 @@ export function normalizeAnswer(text, currentCard = null) {
     .replace(/\s*\([^)]*\)/g, "")
     // Remove the word "male" or "female" at the end
     .replace(/\s+(male|female)$/g, "")
-    // Normalize Spanish accents
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+    // Keep Spanish accents for Spanish answers
+    .replace(/\s+/g, " ");
 
   // For the Numbers category, handle numeric answers
   if (currentCard && currentCard.category === "Numbers") {
