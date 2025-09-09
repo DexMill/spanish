@@ -2,14 +2,15 @@
   "title": "Senderos 1A – Lección Preliminar",
   "categoryOrder": [
     "Classroom Words",
-    "Time Words", 
+    "Time Words",
     "Colors",
     "Days of the Week",
     "Months",
     "Numbers",
     "Weather",
     "Seasons",
-    "Adjectives"
+    "Adjectives",
+    "Lección 4: Los Pasatiempos"
   ],
   "vocabulary": [
     {
@@ -566,6 +567,126 @@
       "category": "Adjectives",
       "spanish": "trabajadora",
       "english": "hard working(female)"
+    },
+    {
+      "category": "Lección 4: Los Pasatiempos",
+      "spanish": "andar en patineta",
+      "english": "to skateboard"
+    },
+    {
+      "category": "Lección 4: Los Pasatiempos",
+      "spanish": "bucear",
+      "english": "to scuba dive"
+    },
+    {
+      "category": "Lección 4: Los Pasatiempos",
+      "spanish": "la diversión",
+      "english": "fun activity"
+    },
+    {
+      "category": "Lección 4: Los Pasatiempos",
+      "spanish": "escalar montañas",
+      "english": "to climb mountains"
+    },
+    {
+      "category": "Lección 4: Los Pasatiempos",
+      "spanish": "escribir un mensaje electrónico",
+      "english": "to write an e-mail"
+    },
+    {
+      "category": "Lección 4: Los Pasatiempos",
+      "spanish": "escribir una carta",
+      "english": "to write a letter"
+    },
+    {
+      "category": "Lección 4: Los Pasatiempos",
+      "spanish": "esquiar",
+      "english": "to ski"
+    },
+    {
+      "category": "Lección 4: Los Pasatiempos",
+      "spanish": "el fin de semana",
+      "english": "weekend"
+    },
+    {
+      "category": "Lección 4: Los Pasatiempos",
+      "spanish": "ganar",
+      "english": "to win"
+    },
+    {
+      "category": "Lección 4: Los Pasatiempos",
+      "spanish": "ir de excursión",
+      "english": "to go on a hike"
+    },
+    {
+      "category": "Lección 4: Los Pasatiempos",
+      "spanish": "leer el correo electrónico",
+      "english": "to read a e-mail"
+    },
+    {
+      "category": "Lección 4: Los Pasatiempos",
+      "spanish": "leer un periódico",
+      "english": "to read a newspaper"
+    },
+    {
+      "category": "Lección 4: Los Pasatiempos",
+      "spanish": "leer una revista",
+      "english": "to read a magazine"
+    },
+    {
+      "category": "Lección 4: Los Pasatiempos",
+      "spanish": "nadar",
+      "english": "to swim"
+    },
+    {
+      "category": "Lección 4: Los Pasatiempos",
+      "spanish": "el pasatiempo",
+      "english": "hobby"
+    },
+    {
+      "category": "Lección 4: Los Pasatiempos",
+      "spanish": "pasear",
+      "english": "to take a walk"
+    },
+    {
+      "category": "Lección 4: Los Pasatiempos",
+      "spanish": "pasear en bicicleta",
+      "english": "to ride a bicycle"
+    },
+    {
+      "category": "Lección 4: Los Pasatiempos",
+      "spanish": "patinar en línea",
+      "english": "to (inline) skate"
+    },
+    {
+      "category": "Lección 4: Los Pasatiempos",
+      "spanish": "practicar deportes",
+      "english": "to play sports"
+    },
+    {
+      "category": "Lección 4: Los Pasatiempos",
+      "spanish": "los ratos libres",
+      "english": "free time"
+    },
+    {
+      "category": "Lección 4: Los Pasatiempos",
+      "spanish": "tomar el sol",
+      "english": "to sunbathe"
+    },
+    {
+      "category": "Lección 4: Los Pasatiempos",
+      "spanish": "ver películas",
+      "english": "to watch movies"
+    },
+    {
+      "category": "Lección 4: Los Pasatiempos",
+      "spanish": "el videojuego",
+      "english": "video game"
+    },
+    {
+      "category": "Lección 4: Los Pasatiempos",
+      "spanish": "visitar monumentos",
+      "english": "to visit monuments"
     }
   ]
 }
