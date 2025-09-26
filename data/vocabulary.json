@@ -10,7 +10,8 @@
     "Weather",
     "Seasons",
     "Adjectives",
-    "Lección 4: Los Pasatiempos"
+    "Lección 4: Los Pasatiempos",
+    "los deportes y lugares"
   ],
   "vocabulary": [
     {
@@ -687,6 +688,146 @@
       "category": "Lección 4: Los Pasatiempos",
       "spanish": "visitar monumentos",
       "english": "to visit monuments"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "el baloncesto",
+      "english": "basketball"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "el béisbol",
+      "english": "baseball"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "el café",
+      "english": "café"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "el centro",
+      "english": "downtown"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "el ciclismo",
+      "english": "cycling"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "el cine",
+      "english": "movie theater"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "deportivo/a",
+      "english": "sports-related"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "el equipo",
+      "english": "team"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "el esquí (acuático)",
+      "english": "(water) skiing"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "favorito/a",
+      "english": "favorite"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "el fútbol",
+      "english": "soccer"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "el fútbol americano",
+      "english": "football"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "el gimnasio",
+      "english": "gymnasium"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "el golf",
+      "english": "golf"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "el hockey",
+      "english": "hockey"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "la iglesia",
+      "english": "church"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "el/la jugador(a)",
+      "english": "player"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "el lugar",
+      "english": "place"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "el museo",
+      "english": "museum"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "la natación",
+      "english": "swimming"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "el parque",
+      "english": "park"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "el partido",
+      "english": "game; match"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "la pelota",
+      "english": "ball"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "la piscina",
+      "english": "swimming pool"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "la plaza",
+      "english": "city or town square"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "el restaurante",
+      "english": "restaurant"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "el tenis",
+      "english": "tennis"
+    },
+    {
+      "category": "los deportes y lugares",
+      "spanish": "el vóleibol",
+      "english": "volleyball"
     }
   ]
 }
