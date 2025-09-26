@@ -721,7 +721,7 @@
     },
     {
       "category": "los deportes y lugares",
-      "spanish": "deportivo/a",
+      "spanish": "deportivo",
       "english": "sports-related"
     },
     {
@@ -731,12 +731,12 @@
     },
     {
       "category": "los deportes y lugares",
-      "spanish": "el esquí (acuático)",
-      "english": "(water) skiing"
+      "spanish": "el esquí acuático",
+      "english": "water skiing"
     },
     {
       "category": "los deportes y lugares",
-      "spanish": "favorito/a",
+      "spanish": "favorito",
       "english": "favorite"
     },
     {
@@ -771,7 +771,7 @@
     },
     {
       "category": "los deportes y lugares",
-      "spanish": "el/la jugador(a)",
+      "spanish": "el jugador",
       "english": "player"
     },
     {
