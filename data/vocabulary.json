@@ -11,7 +11,22 @@
     "Seasons",
     "Adjectives",
     "Lección 4: Los Pasatiempos",
-    "los deportes y lugares"
+    "los deportes y lugares",
+    "Entertainment & Activities",
+    "Sports Verbs",
+    "Emotional & Physical States",
+    "Time Expressions",
+    "Pronouns",
+    "Modal Verbs",
+    "Common Expressions",
+    "Preference Expressions",
+    "Quantity & Transition Words",
+    "Future Tense Expressions",
+    "Obligation Expressions",
+    "Verb Conjugations - jugar",
+    "Verb Conjugations - poder",
+    "Verb Conjugations - querer",
+    "Verb Conjugations - saber"
   ],
   "vocabulary": [
     {
@@ -828,6 +843,386 @@
       "category": "los deportes y lugares",
       "spanish": "el vóleibol",
       "english": "volleyball"
+    },
+    {
+      "category": "Entertainment & Activities",
+      "spanish": "el baile",
+      "english": "dance"
+    },
+    {
+      "category": "Entertainment & Activities",
+      "spanish": "el concierto",
+      "english": "concert"
+    },
+    {
+      "category": "Entertainment & Activities",
+      "spanish": "la fiesta",
+      "english": "party"
+    },
+    {
+      "category": "Entertainment & Activities",
+      "spanish": "el partido",
+      "english": "game, match"
+    },
+    {
+      "category": "Sports Verbs",
+      "spanish": "ir de cámping, acampar",
+      "english": "to go camping"
+    },
+    {
+      "category": "Sports Verbs",
+      "spanish": "ir de pesca",
+      "english": "to go fishing"
+    },
+    {
+      "category": "Sports Verbs",
+      "spanish": "jugar al básquetbol (baloncesto)",
+      "english": "to play basketball"
+    },
+    {
+      "category": "Sports Verbs",
+      "spanish": "jugar al béisbol",
+      "english": "to play baseball"
+    },
+    {
+      "category": "Sports Verbs",
+      "spanish": "jugar al fútbol",
+      "english": "to play soccer"
+    },
+    {
+      "category": "Sports Verbs",
+      "spanish": "jugar al fútbol americano",
+      "english": "to play football"
+    },
+    {
+      "category": "Sports Verbs",
+      "spanish": "jugar al golf",
+      "english": "to play golf"
+    },
+    {
+      "category": "Sports Verbs",
+      "spanish": "jugar al tenis",
+      "english": "to play tennis"
+    },
+    {
+      "category": "Sports Verbs",
+      "spanish": "jugar al vóleibol",
+      "english": "to play volleyball"
+    },
+    {
+      "category": "Modal Verbs",
+      "spanish": "saber",
+      "english": "to know"
+    },
+    {
+      "category": "Emotional & Physical States",
+      "spanish": "cansado",
+      "english": "tired"
+    },
+    {
+      "category": "Emotional & Physical States",
+      "spanish": "contento",
+      "english": "happy"
+    },
+    {
+      "category": "Emotional & Physical States",
+      "spanish": "enfermo",
+      "english": "sick"
+    },
+    {
+      "category": "Emotional & Physical States",
+      "spanish": "mal",
+      "english": "bad"
+    },
+    {
+      "category": "Emotional & Physical States",
+      "spanish": "ocupado",
+      "english": "busy"
+    },
+    {
+      "category": "Emotional & Physical States",
+      "spanish": "triste",
+      "english": "sad"
+    },
+    {
+      "category": "Time Expressions",
+      "spanish": "¿A qué hora?",
+      "english": "At what time?"
+    },
+    {
+      "category": "Time Expressions",
+      "spanish": "A la una / A las dos",
+      "english": "At one / at two"
+    },
+    {
+      "category": "Time Expressions",
+      "spanish": "de la mañana",
+      "english": "in the morning"
+    },
+    {
+      "category": "Time Expressions",
+      "spanish": "de la tarde",
+      "english": "in the afternoon"
+    },
+    {
+      "category": "Time Expressions",
+      "spanish": "de la noche",
+      "english": "in the evening / at night"
+    },
+    {
+      "category": "Time Expressions",
+      "spanish": "este fin de semana",
+      "english": "this weekend"
+    },
+    {
+      "category": "Time Expressions",
+      "spanish": "esta noche",
+      "english": "this evening / tonight"
+    },
+    {
+      "category": "Time Expressions",
+      "spanish": "esta tarde",
+      "english": "this afternoon"
+    },
+    {
+      "category": "Pronouns",
+      "spanish": "conmigo",
+      "english": "with me"
+    },
+    {
+      "category": "Pronouns",
+      "spanish": "contigo",
+      "english": "with you"
+    },
+    {
+      "category": "Modal Verbs",
+      "spanish": "poder",
+      "english": "to be able to / can"
+    },
+    {
+      "category": "Common Expressions",
+      "spanish": "¡Ay! ¡Qué pena!",
+      "english": "Oh! What a shame!"
+    },
+    {
+      "category": "Common Expressions",
+      "spanish": "¡Genial!",
+      "english": "Great!"
+    },
+    {
+      "category": "Common Expressions",
+      "spanish": "¡Lo siento!",
+      "english": "I'm sorry!"
+    },
+    {
+      "category": "Common Expressions",
+      "spanish": "¡Oye!",
+      "english": "Hey!"
+    },
+    {
+      "category": "Common Expressions",
+      "spanish": "¡Qué buena idea!",
+      "english": "What a good idea!"
+    },
+    {
+      "category": "Preference Expressions",
+      "spanish": "querer",
+      "english": "to want"
+    },
+    {
+      "category": "Preference Expressions",
+      "spanish": "¿Qué te gustaría, dulces o helado?",
+      "english": "What would you like, candy or ice cream?"
+    },
+    {
+      "category": "Preference Expressions",
+      "spanish": "Me gustaría un helado.",
+      "english": "I would like an ice cream."
+    },
+    {
+      "category": "Quantity & Transition Words",
+      "spanish": "demasiado",
+      "english": "too (much)"
+    },
+    {
+      "category": "Quantity & Transition Words",
+      "spanish": "un poco de",
+      "english": "a little (bit of)"
+    },
+    {
+      "category": "Quantity & Transition Words",
+      "spanish": "entonces",
+      "english": "then"
+    },
+    {
+      "category": "Future Tense Expressions",
+      "spanish": "Voy a cantar",
+      "english": "I am going to sing"
+    },
+    {
+      "category": "Future Tense Expressions",
+      "spanish": "Vas a bailar",
+      "english": "You are going to dance"
+    },
+    {
+      "category": "Future Tense Expressions",
+      "spanish": "Ella va a nadar",
+      "english": "She is going to swim"
+    },
+    {
+      "category": "Future Tense Expressions",
+      "spanish": "Vamos a esquiar",
+      "english": "We are going to ski"
+    },
+    {
+      "category": "Future Tense Expressions",
+      "spanish": "Ustedes van a hablar",
+      "english": "You all are going to speak"
+    },
+    {
+      "category": "Obligation Expressions",
+      "spanish": "Tengo que cantar",
+      "english": "I have to sing"
+    },
+    {
+      "category": "Obligation Expressions",
+      "spanish": "Tienes que bailar",
+      "english": "You have to dance"
+    },
+    {
+      "category": "Obligation Expressions",
+      "spanish": "Ella tiene que nadar",
+      "english": "She has to swim"
+    },
+    {
+      "category": "Obligation Expressions",
+      "spanish": "Tenemos que esquiar",
+      "english": "We have to ski"
+    },
+    {
+      "category": "Obligation Expressions",
+      "spanish": "Ustedes tienen que hablar",
+      "english": "You all have to speak"
+    },
+    {
+      "category": "Verb Conjugations - jugar",
+      "spanish": "juego",
+      "english": "I play"
+    },
+    {
+      "category": "Verb Conjugations - jugar",
+      "spanish": "juegas",
+      "english": "you play"
+    },
+    {
+      "category": "Verb Conjugations - jugar",
+      "spanish": "juega",
+      "english": "he/she plays"
+    },
+    {
+      "category": "Verb Conjugations - jugar",
+      "spanish": "jugamos",
+      "english": "we play"
+    },
+    {
+      "category": "Verb Conjugations - jugar",
+      "spanish": "jugáis",
+      "english": "you (plural informal) play"
+    },
+    {
+      "category": "Verb Conjugations - jugar",
+      "spanish": "juegan",
+      "english": "they play"
+    },
+    {
+      "category": "Verb Conjugations - poder",
+      "spanish": "puedo",
+      "english": "I can"
+    },
+    {
+      "category": "Verb Conjugations - poder",
+      "spanish": "puedes",
+      "english": "you can"
+    },
+    {
+      "category": "Verb Conjugations - poder",
+      "spanish": "puede",
+      "english": "he/she can"
+    },
+    {
+      "category": "Verb Conjugations - poder",
+      "spanish": "podemos",
+      "english": "we can"
+    },
+    {
+      "category": "Verb Conjugations - poder",
+      "spanish": "podéis",
+      "english": "you (plural informal) can"
+    },
+    {
+      "category": "Verb Conjugations - poder",
+      "spanish": "pueden",
+      "english": "they can"
+    },
+    {
+      "category": "Verb Conjugations - querer",
+      "spanish": "quiero",
+      "english": "I want"
+    },
+    {
+      "category": "Verb Conjugations - querer",
+      "spanish": "quieres",
+      "english": "you want"
+    },
+    {
+      "category": "Verb Conjugations - querer",
+      "spanish": "quiere",
+      "english": "he/she wants"
+    },
+    {
+      "category": "Verb Conjugations - querer",
+      "spanish": "queremos",
+      "english": "we want"
+    },
+    {
+      "category": "Verb Conjugations - querer",
+      "spanish": "queréis",
+      "english": "you (plural informal) want"
+    },
+    {
+      "category": "Verb Conjugations - querer",
+      "spanish": "quieren",
+      "english": "they want"
+    },
+    {
+      "category": "Verb Conjugations - saber",
+      "spanish": "sé",
+      "english": "I know"
+    },
+    {
+      "category": "Verb Conjugations - saber",
+      "spanish": "sabes",
+      "english": "you know"
+    },
+    {
+      "category": "Verb Conjugations - saber",
+      "spanish": "sabe",
+      "english": "he/she knows"
+    },
+    {
+      "category": "Verb Conjugations - saber",
+      "spanish": "sabemos",
+      "english": "we know"
+    },
+    {
+      "category": "Verb Conjugations - saber",
+      "spanish": "sabéis",
+      "english": "you (plural informal) know"
+    },
+    {
+      "category": "Verb Conjugations - saber",
+      "spanish": "saben",
+      "english": "they know"
     }
   ]
 }
