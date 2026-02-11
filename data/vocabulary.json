@@ -10,6 +10,7 @@
     "Weather",
     "Seasons",
     "Adjectives",
+    "Nationalities",
     "Lección 4: Los Pasatiempos",
     "los deportes y lugares",
     "Entertainment & Activities",
@@ -583,6 +584,266 @@
       "category": "Adjectives",
       "spanish": "trabajadora",
       "english": "hard working(female)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "antipático",
+      "english": "unpleasant(male)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "antipática",
+      "english": "unpleasant(female)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "bonito",
+      "english": "pretty(male)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "bonita",
+      "english": "pretty(female)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "delgado",
+      "english": "thin; slender(male)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "delgada",
+      "english": "thin; slender(female)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "feo",
+      "english": "ugly(male)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "fea",
+      "english": "ugly(female)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "gordo",
+      "english": "fat(male)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "gorda",
+      "english": "fat(female)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "grande",
+      "english": "big; large"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "mismo",
+      "english": "same(male)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "misma",
+      "english": "same(female)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "moreno",
+      "english": "brunet(male)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "morena",
+      "english": "brunette(female)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "pelirrojo",
+      "english": "red-haired(male)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "pelirroja",
+      "english": "red-haired(female)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "pequeño",
+      "english": "small(male)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "pequeña",
+      "english": "small(female)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "tonto",
+      "english": "silly; foolish(male)"
+    },
+    {
+      "category": "Adjectives",
+      "spanish": "tonta",
+      "english": "silly; foolish(female)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "alemán",
+      "english": "german(male)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "alemana",
+      "english": "german(female)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "argentino",
+      "english": "argentine(male)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "argentina",
+      "english": "argentine(female)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "canadiense",
+      "english": "canadian"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "chino",
+      "english": "chinese(male)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "china",
+      "english": "chinese(female)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "costarricense",
+      "english": "costa rican"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "cubano",
+      "english": "cuban(male)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "cubana",
+      "english": "cuban(female)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "ecuatoriano",
+      "english": "ecuadorian(male)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "ecuatoriana",
+      "english": "ecuadorian(female)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "español",
+      "english": "spanish(male)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "española",
+      "english": "spanish(female)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "estadounidense",
+      "english": "from the u.s."
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "francés",
+      "english": "french(male)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "francesa",
+      "english": "french(female)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "inglés",
+      "english": "english(male)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "inglesa",
+      "english": "english(female)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "italiano",
+      "english": "italian(male)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "italiana",
+      "english": "italian(female)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "japonés",
+      "english": "japanese(male)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "japonesa",
+      "english": "japanese(female)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "mexicano",
+      "english": "mexican(male)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "mexicana",
+      "english": "mexican(female)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "norteamericano",
+      "english": "(north) american(male)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "norteamericana",
+      "english": "(north) american(female)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "puertorriqueño",
+      "english": "puerto rican(male)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "puertorriqueña",
+      "english": "puerto rican(female)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "ruso",
+      "english": "russian(male)"
+    },
+    {
+      "category": "Nationalities",
+      "spanish": "rusa",
+      "english": "russian(female)"
     },
     {
       "category": "Lección 4: Los Pasatiempos",
