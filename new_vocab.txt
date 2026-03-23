@@ -1,0 +1,36 @@
+La alfombra:rug
+El armario: closet
+La cama:bed
+La cómoda:dresser
+Las cortinas:curtains
+El cuadro:painting
+El despertador:alarm clock
+El dormitorio:bedroom
+El espejo:mirror
+El estante:shelf,bookshelf
+La lámpara
+La mesita:night table
+La pared:wall
+El disco compacto:CD
+El equip de snide: sound system
+El lector DVD:Dvd player
+El televisor: TV set
+La videocasetera:VCR
+Bonito:pretty
+Feo:ugly
+Grande:large
+Importante: important
+Mismo:same
+Pequeño:small
+Propio:own
+Derecha:right
+Izquierda:left
+Mejor que:better than
+El mejor:the best
+Menos ... que:less,fewer than
+Peor que:worse then
+El per:The worst
+La cosa:thing
+Para mí: in my opinion
+Para ti: in your opinion
+La posesión: possession
