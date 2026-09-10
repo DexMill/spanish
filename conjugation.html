@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PIB Spanish 2 · Conjugation practice</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    main { max-width: 850px; margin: auto; padding: 24px; }
+    .practice-panel { background: var(--panel); border: 1px solid #293249; border-radius: 16px; padding: 24px; margin-top: 20px; }
+    .filters { display: flex; gap: 16px; flex-wrap: wrap; }
+    label { display: grid; gap: 8px; }
+    .toggle { display: flex; align-items: center; }
+    input[type=checkbox] { width: auto; }
+    #answer { width: 100%; margin: 12px 0; }
+    #prompt { font-size: 28px; }
+    #feedback { min-height: 28px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    th, td { padding: 10px; text-align: left; border-bottom: 1px solid #293249; }
+    button:disabled { opacity: .5; cursor: default; }
+    a { color: #b5a5ff; }
+  </style>
+</head>
+<body>
+  <header><h1>PIB Spanish 2 · Verb practice</h1><a href="index.html">Vocabulary</a></header>
+  <main>
+    <h2>Present-tense conjugations</h2>
+    <p>Conjugate verbs from your Unit 1 list in the present tense. Include accents, reflexive pronouns when needed, and any words after the verb.</p>
+    <p class="muted">Choose regular, stem-changing, irregular, or reflexive verbs. Gustar has its own practice for gusta vs. gustan.</p>
+    <section class="practice-panel filters" aria-label="Practice settings">
+      <label>Verb type<select id="type"><option value="all">All verbs</option><option value="regular">Regular verbs</option><option value="stem">Stem-changing verbs</option><option value="irregular">Irregular verbs</option><option value="reflexive">All reflexive verbs</option><option value="special">Gustar: gusta / gustan</option></select></label>
+      <label>Verb<select id="verb"></select></label>
+      <label class="toggle"><input id="vosotros" type="checkbox">Include vosotros</label>
+    </section>
+    <section class="practice-panel" aria-label="Conjugation question">
+      <p id="score" aria-live="polite"></p>
+      <p id="meaning"></p>
+      <h2 id="prompt"></h2>
+      <form id="practice">
+        <label for="answer">Your conjugation</label>
+        <input id="answer" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Type the conjugated phrase" required>
+        <button class="btn accent" id="check" type="submit">Check answer</button>
+        <button class="btn outline" id="reveal" type="button">Show answer</button>
+        <button class="btn" id="next" type="button" disabled>Next</button>
+      </form>
+      <p id="feedback" role="status"></p>
+      <p id="explanation"></p>
+      <details id="reference"><summary>See this verb’s conjugation table</summary><table><thead><tr><th scope="col">Subject</th><th scope="col">Present tense</th></tr></thead><tbody id="forms"></tbody></table></details>
+    </section>
+  </main>
+  <script type="module" src="js/conjugation-ui.mjs"></script>
+</body>
+</html>

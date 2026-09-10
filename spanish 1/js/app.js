@@ -5,7 +5,6 @@
 
 import { scheduler } from "./scheduler.js";
 import { SpeechManager } from "./speech.js";
-import { matchesVocabularyAnswer } from "./answers.mjs";
 import {
   normalizeAnswer,
   numberWords,
@@ -78,7 +77,7 @@ class SpanishAnkiApp {
       this.vocabulary = await response.json();
 
       // Load stored cards from localStorage
-      const storedCards = localStorage.getItem("pib_spanish2_importedCards");
+      const storedCards = localStorage.getItem("importedCards");
       if (storedCards) {
         const importedData = JSON.parse(storedCards);
 
@@ -104,7 +103,7 @@ class SpanishAnkiApp {
   }
 
   saveImportedCards() {
-    const storedCards = localStorage.getItem("pib_spanish2_importedCards");
+    const storedCards = localStorage.getItem("importedCards");
     let importedData = storedCards
       ? JSON.parse(storedCards)
       : { categoryOrder: [], vocabulary: [] };
@@ -118,7 +117,7 @@ class SpanishAnkiApp {
         "Are you sure you want to remove all imported cards? This cannot be undone."
       )
     ) {
-      localStorage.removeItem("pib_spanish2_importedCards");
+      localStorage.removeItem("importedCards");
       this.loadVocabulary().then(() => {
         this.setupCards();
         this.renderCategoryList();
@@ -152,7 +151,7 @@ class SpanishAnkiApp {
       const wrap = document.createElement("label");
       wrap.className = "cat";
       wrap.innerHTML = `
-        <input type="checkbox" id="${id}" data-cat="${cat}" checked />
+        <input type="checkbox" id="${id}" data-cat="${cat}" />
         <span>${cat}</span>
       `;
       this.elements.categoryList.appendChild(wrap);
@@ -238,7 +237,6 @@ class SpanishAnkiApp {
       this.buildQueue();
       if (this.queue.length === 0) {
         this.elements.cardMeta.textContent = "No cards due. You are caught up!";
-        this.currentCard = null;
         this.elements.front.textContent = "";
         this.elements.back.textContent = "";
         this.elements.gradeBar.classList.add("hidden");
@@ -306,7 +304,6 @@ class SpanishAnkiApp {
       this.elements.answerInput.focus();
     }
 
-    this.elements.flipBtn.textContent = "Check answer (Enter)";
     this.cardStartTime = Date.now();
     const responseTimeText = this.currentCard._responseTime
       ? ` · Time: ${(this.currentCard._responseTime / 1000).toFixed(1)}s`
@@ -323,7 +320,6 @@ class SpanishAnkiApp {
   }
 
   showAnswer() {
-    if (!this.currentCard) return;
     const userAnswer = normalizeAnswer(
       this.elements.answerInput.value,
       this.currentCard
@@ -332,9 +328,7 @@ class SpanishAnkiApp {
       this.elements.back.textContent,
       this.currentCard
     );
-    const isCorrect = userAnswer === correctAnswer || matchesVocabularyAnswer(
-      this.elements.answerInput.value, this.elements.back.textContent
-    );
+    const isCorrect = userAnswer === correctAnswer;
     const responseTime = Date.now() - this.cardStartTime;
 
     this.elements.back.classList.remove("hidden");
@@ -389,7 +383,7 @@ class SpanishAnkiApp {
     });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "pib_spanish2_progress.json";
+    a.download = "senderos1a_progress.json";
     a.click();
   }
 
@@ -441,7 +435,7 @@ class SpanishAnkiApp {
           });
 
           // Save to localStorage
-          const storedCards = localStorage.getItem("pib_spanish2_importedCards");
+          const storedCards = localStorage.getItem("importedCards");
           let importedData = storedCards
             ? JSON.parse(storedCards)
             : { categoryOrder: [], vocabulary: [] };
@@ -454,7 +448,7 @@ class SpanishAnkiApp {
             ...newVocabulary,
           ];
 
-          localStorage.setItem("pib_spanish2_importedCards", JSON.stringify(importedData));
+          localStorage.setItem("importedCards", JSON.stringify(importedData));
 
           this.vocabulary.vocabulary = [
             ...this.vocabulary.vocabulary,
@@ -616,8 +610,8 @@ class SpanishAnkiApp {
         this.elements.answerInput.value = alternatives[0];
       }
     } else {
-      const matchingAlt = alternatives.find(
-        (alt) => matchesVocabularyAnswer(alt, expectedAnswer)
+      const matchingAlt = normalizedAlts.find(
+        (alt) => alt === normalizedExpected
       );
       this.elements.answerInput.value = matchingAlt || alternatives[0];
     }

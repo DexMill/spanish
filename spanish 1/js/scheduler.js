@@ -3,7 +3,7 @@
  * Implements SM-2-style scheduling for flashcards
  */
 
-const STORAGE_KEY = "pib_spanish2_anki_v1";
+const STORAGE_KEY = "senderos1a_anki_v1";
 
 export const scheduler = {
   // Load schedule data from localStorage

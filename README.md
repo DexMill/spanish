@@ -1,141 +1,17 @@
-# Spanish Flashcard App - Restructured
+# PIB Spanish 2
 
-A spaced repetition flashcard application for learning Spanish vocabulary from Senderos 1A – Lección Preliminar.
+All previous coursework, vocabulary, and the flashcard app are archived in [spanish 1](<spanish 1/>).
 
-## Project Structure
+To use the Spanish 1 app, run `python3 -m http.server 8000` from this directory and open http://localhost:8000/spanish%201/.
 
-The original single HTML file has been restructured into clean, modular files:
+Open http://localhost:8000/ for the Spanish 2 vocabulary app or http://localhost:8000/conjugation.html for present-tense verb practice.
 
-```
-spanish/
-├── index_new.html          # Clean HTML structure
-├── styles.css              # All CSS styles
-├── data/
-│   └── vocabulary.json     # Spanish vocabulary data
-├── js/
-│   ├── app.js             # Main application logic
-│   ├── scheduler.js       # Spaced repetition scheduler
-│   ├── speech.js          # Speech recognition/synthesis
-│   └── utils.js           # Utility functions
-└── README.md              # This file
-```
+The Unit 1 deck contains all 100 term pairs pasted by the user, organized into 13 sections: pronouns, questions, essential verbs, school and communication, everyday activities, food and meals, sleep, bathroom and personal care, getting dressed, feelings and other reflexives, sequence, time, and people/things. The Quizlet heading says 113 terms, so 13 pairs are still missing. No missing terms have been guessed.
 
-## Features
+Conjugation practice covers all supplied verbs, including both alternatives on cards such as `ser, estar`. Filter by regular, stem-changing, irregular, reflexive, or gustar practice, or choose an individual verb. Vosotros is optional. Reflexive answers require the matching pronoun; phrases retain their objects (for example, `me lavo las manos`). A matching subject pronoun is optional except in the specially labeled gustar exercises, which ask for `me gusta`, `me gustan`, etc. Each answer includes an explanation and a conjugation table is available for reference.
 
-- **Spaced Repetition**: Uses SM-2-style algorithm for optimal learning
-- **Multiple Study Modes**: Text-to-text, text-to-voice, voice-to-text
-- **Category Selection**: Study specific vocabulary categories
-- **Speech Recognition**: Practice pronunciation with voice input
-- **Progress Tracking**: Export/import your learning progress
-- **Local Storage**: All data saved in browser (no server required)
+Vocabulary checking accepts any listed translation alternative and ignores case, punctuation, and extra spacing while keeping accents significant. The original pairs are preserved in `data/unit-1-source.tsv`. Run `python3 scripts/build-unit1.py` to rebuild the categorized vocabulary and conjugation data.
 
-## Usage
+Spanish 2 uses separate browser storage keys for progress and imported vocabulary. Spanish 1 files remain archived unchanged.
 
-### Development
-
-Since the app uses ES modules, it needs to be served over HTTP:
-
-```bash
-# Start local development server
-python3 -m http.server 8000
-
-# Or use Node.js
-npx serve .
-
-# Then visit http://localhost:8000/index_new.html
-```
-
-### Study Modes
-
-1. **Spanish Text → English Text**: Traditional flashcards
-2. **English Text → Spanish Text**: Reverse practice
-3. **Spanish Text → English Voice**: Speak English translation
-4. **English Text → Spanish Voice**: Speak Spanish translation
-5. **Spanish Voice → English Text**: Listen and type English
-6. **English Voice → Spanish Text**: Listen and type Spanish
-7. **Mix**: Random combination of all modes
-
-### Keyboard Shortcuts
-
-- **Enter**: Check answer / Grade with suggestion
-- **1-4**: Manual grading (Again, Hard, Good, Easy)
-
-## File Details
-
-### `index_new.html` (90 lines)
-
-Clean HTML structure with external references to CSS and JavaScript modules.
-
-### `styles.css` (280+ lines)
-
-All CSS styles including:
-
-- Dark theme variables
-- Responsive layout
-- Card animations
-- Audio control styling
-
-### `data/vocabulary.json`
-
-Structured vocabulary data with:
-
-- 150+ Spanish-English word pairs
-- 9 categories (Classroom, Time, Colors, etc.)
-- Organized by difficulty/topic
-
-### `js/app.js` (400+ lines)
-
-Main application class handling:
-
-- UI interactions
-- Card management
-- Session state
-- Audio controls
-
-### `js/scheduler.js` (80 lines)
-
-Spaced repetition implementation:
-
-- SM-2 algorithm
-- LocalStorage persistence
-- Grade processing
-
-### `js/speech.js` (100 lines)
-
-Speech functionality:
-
-- Text-to-speech synthesis
-- Speech recognition
-- Multiple language support
-
-### `js/utils.js` (120 lines)
-
-Utility functions:
-
-- Text normalization
-- Number word conversion
-- Array manipulation
-
-## Benefits of Restructuring
-
-1. **Maintainability**: Code is organized into logical modules
-2. **Reusability**: Components can be easily reused or modified
-3. **Debugging**: Easier to locate and fix issues
-4. **Performance**: Better caching of static assets
-5. **Collaboration**: Multiple developers can work on different files
-6. **Testing**: Individual modules can be unit tested
-7. **Extensibility**: Easy to add new features or vocabulary sets
-
-## Browser Compatibility
-
-- Modern browsers with ES6 module support
-- Speech features require Chrome/Edge for best results
-- Works offline after initial load (service worker could be added)
-
-## Future Enhancements
-
-- Add more vocabulary sets
-- Implement service worker for offline use
-- Add progress analytics and charts
-- Support for custom vocabulary import
-- Multiplayer/competitive modes
+Run checks with `node --test tests/*.test.mjs`.
